@@ -1,86 +1,78 @@
+<?php
+include_once 'configuration.php';
+?>
 <!doctype html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bikers events</title>
-        <link href="public_html/assets/css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="assets/library/bower_components/foundation/css/foundation.css">
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+        <link href="assets/library/bootstrap/bootstrap.css" rel="stylesheet"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div id="header">
-            <a href="index.php" class="logo">
-                <img src="public_html/assets/images/head.png" alt=""/>
-            </a>
-            <ul id="navigation">
-                <li class="selected">
-                    <a href="index.php">Accueil</a>
-                </li>
-                <li>
-                    <a href="public_html/assets/views/datePicker.php">Calendrier événements</a>
-                </li>
-                <li>
-                    <a href="public_html/assets/views/tetesDeBikers.php">Gallery</a>
-                </li>
-                <li>
-                    <a href="blog.php">Connection/Inscription</a>
-                </li>
-                <li>
-                    <a href="public_html/assets/views/contact.php">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <h2>Enfin un site pour les bikers!!</h2>
-        <div id="body">
-            <div id="featured">
-                <img src="public_html/assets/images/route66.jpeg" alt=""/>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php">Accueil</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="?page=calendar">calendrier évenements</a></li>
+                        <li><a  href="?page=gallery">galerie</a></li>
+                        <li><a  href="?page=addUser">inscription</a></li>
+                        <li><a  href="?page=user">connexion</a></li>
+                    </ul>
+                </div>
             </div>
-            <ul>
-                <li>
-                    <a href="public_html/assets/views/tetesDeBikers.php">
-                        <img src="public_html/assets/images/decouvrir.jpeg" alt=""/>
-                        <span>Gallerie "Têtes de bikers"</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="public_html/assets/views/montures.php">
-                        <img src="public_html/assets/images/presentMontures.jpeg" alt=""/>
-                        <span>Gallerie "Nos montures"</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="public_html/assets/views/hellsWeek.php">
-                        <img src="public_html/assets/images/hellsWeek.jpeg" alt=""/>
-                        <span>Découvrez la Hells week</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="views/fbf.php">
-                        <img src="images/fbf.jpeg" alt="">
-                        <span>Découvrez la fédération des bikers de France</span>
-                    </a>
-                </li>
-            </ul>
+        </nav>
+        <div class="container-fluid" id="content">
+            <?php
+//            on verifie si page passe dans l url
+            if (isset($_GET['page']))
+            {
+                //avec la fonction strcmp on verifie l'égalité entre les 2 chaines de carractere passés en GET
+                if (strcmp($_GET['page'], 'gallery') == 0)
+                {
+                    //si l' égalité est vérifiée on inclu la page
+                    include_once 'views/gallery.php';
+                }
+                if (!strcmp($_GET['page'], 'users'))
+                {
+                    include_once 'views/user.php';
+                }
+                if (!strcmp($_GET['page'], 'hellsWeek'))
+                {
+                    include_once 'views/hellsWeek.php';
+                }
+                if (!strcmp($_GET['page'], 'fbf'))
+                {
+                    include_once 'views/fbf.php';
+                }
+                if (!strcmp($_GET['page'], 'calendar'))
+                {
+                    include_once 'views/calendar.php';
+                }
+                if (!strcmp($_GET['page'], 'addUser'))
+                {
+                    include_once 'views/addUser.php';
+                }
+            }
+            // sinon retour à la page d'acceuil
+            else
+            {
+                include_once 'views/accueil.php';
+            }
+            ?>
         </div>
-        <div id="footer">
-            <div>
-                <p>&copy; 2017 by Guillaume Le Bot. All rights reserved.</p>
-                <ul>
-                    <li>
-                        <a href="http://freewebsitetemplates.com/go/twitter/" id="twitter">twitter</a>
-                    </li>
-                    <li>
-                        <a href="http://freewebsitetemplates.com/go/facebook/" id="facebook">facebook</a>
-                    </li>
-                    <li>
-                        <a href="http://freewebsitetemplates.com/go/googleplus/" id="googleplus">googleplus</a>
-                    </li>
-                    <li>
-                        <a href="http://pinterest.com/fwtemplates/" id="pinterest">pinterest</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <script src="assets/library/bower_components/foundation/js/foundation.js">
-        </script>
+        <script src="assets/library/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="assets/library/bootstrap/bootstrap.js" type="text/javascript"></script>
+    </body>
+</html>
 
