@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link href="../assets/css/gallery.css" rel="stylesheet" type="text/css"/>
+        <title>title</title>
+    </head>
+    <body>
+
+    </body>
+</html>
+
+
 <div class="container">
-    <div class="row" >
+        <div class="row" >
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">

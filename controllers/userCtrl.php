@@ -1,7 +1,8 @@
 <?php
 
 //Si on lance l'appel AJAX
-if (isset($_POST['verifLogin'])) {
+if (isset($_POST['verifLogin']))
+{
     //on inclut le modèle car on n'appelle pas la page index.php
     include_once '../models/users.php';
     //On instancie la classe user
@@ -12,7 +13,9 @@ if (isset($_POST['verifLogin'])) {
     $result = $user->checkUser();
     //Avec le echo on passe à data dans l'appel AJAX le JSON
     echo json_encode(array('response' => $result));
-} else { //On est dans un cas sans AJAX
+}
+else
+{ //On est dans un cas sans AJAX
 //Déclaration des variables
     $isOk = 0;
 
@@ -20,15 +23,21 @@ if (isset($_POST['verifLogin'])) {
     $user = new users();
 
 //On vérifie que l'on a bien appuyé sur le bouton connexion
-    if (isset($_POST['connection'])) {
+    if (isset($_POST['connection']))
+    {
         //On stocke la valeur de $_POST['login'] dans l'attribut login de l'objet user en sécurisant (strip_tags)
         $user->login = strip_tags($_POST['login']);
-        //On stocke la valeur de $_POST['mail'] dans l'attribut mail de l'objet user en sécurisant (strip_tags)
-        $user->mail = strip_tags($_POST['mail']);
         //On utilise notre méthode getHashByUser pour récupérer le hash stocké dans notre base
         $user->getHashByUser();
         //On vérifie que le mot de passe saisi et le mot de passe présent dans la base sont les même grâce ) password_verify
         $isOk = password_verify($_POST['password'], $user->password);
+        if ($isOk)
+        {
+            $_SESSION["isConnected"] = $user->login;
+            $_SESSION['userId'] = $user->login;
+            header("Location: http://projetTP/index.php/?page=memberArea");
+        }
     }
+    
 }
 ?>

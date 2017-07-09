@@ -1,14 +1,17 @@
 <?php
+session_start();
 include_once 'configuration.php';
+include_once 'class/database.php';
+include_once 'models/users.php';
+include_once 'controllers/indexCtrl.php';
 ?>
 <!doctype html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Bikers events</title>
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-        <link href="assets/library/bootstrap/bootstrap.css" rel="stylesheet"/>
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/library/bootstrap/bootstrap.css" rel="stylesheet"/>
+        <link href="/assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -24,13 +27,28 @@ include_once 'configuration.php';
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="?page=calendar">calendrier évenements</a></li>
-                        <li><a  href="?page=gallery">galerie</a></li>
-                        <li><a  href="?page=addUser">inscription</a></li>
-                        <li><a  href="?page=user">connexion</a></li>
-                    </ul>
+                        <?php
+                        if (isset($_SESSION['isConnected']))
+                        {
+                            ?>
+                            <li><a href="?page=calendar">Calendrier évenements</a></li>
+                            <li><a  href="?page=gallery">Galerie</a></li>
+                             <li><a  href="/?page=memberArea">Espace membre</a></li>
+                            <li><a  href="/?action=logOut">Déconnexion</a></li>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <li><a href="?page=calendar">calendrier évenements</a></li>
+                            <li><a  href="?page=gallery">galerie</a></li>
+                            <li><a  href="?page=addUser">inscription</a></li>
+                            <li><a  href="?page=user">connexion</a></li>
+                        </ul>
+<?php } ?>
                 </div>
             </div>
+
         </nav>
         <div class="container-fluid" id="content">
             <?php
@@ -43,17 +61,13 @@ include_once 'configuration.php';
                     //si l' égalité est vérifiée on inclu la page
                     include_once 'views/gallery.php';
                 }
-                if (!strcmp($_GET['page'], 'users'))
+                if (!strcmp($_GET['page'], 'user'))
                 {
                     include_once 'views/user.php';
                 }
                 if (!strcmp($_GET['page'], 'hellsWeek'))
                 {
                     include_once 'views/hellsWeek.php';
-                }
-                if (!strcmp($_GET['page'], 'fbf'))
-                {
-                    include_once 'views/fbf.php';
                 }
                 if (!strcmp($_GET['page'], 'calendar'))
                 {
@@ -62,6 +76,10 @@ include_once 'configuration.php';
                 if (!strcmp($_GET['page'], 'addUser'))
                 {
                     include_once 'views/addUser.php';
+                }
+                if (!strcmp($_GET['page'], 'memberArea'))
+                {
+                    include_once 'views/memberArea.php';
                 }
             }
             // sinon retour à la page d'acceuil

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Déclaration des constantes de connexion à la base de données
  */

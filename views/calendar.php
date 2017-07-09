@@ -1,7 +1,7 @@
 <?php
 $monthsList = array('01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre');
 $year = 1900; // on initialise la var année par défaut on met la 1ere année
-$month = 1;    // on initialise la va mois par défaut on met le 1er mois
+$month = 1;    // on initialise la var mois par défaut on met le 1er mois
 // récuperation des données en POST
 if (isset($_POST['years'])) {
     $year = $_POST['years'];
@@ -25,10 +25,11 @@ if($firstDayOfMonthInWeek == 6){
     <head>
         <meta charset="UTF-8">
         <link href="/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <title>Calendrier</title>
     </head>
     <body>
-        <form action="calendar.php" method="POST">
+        <form action="../views/calendar.php" method="POST">
             <!-- création de la liste déroulante pour les mois-->
             <select name="months">
                 <?php
@@ -36,7 +37,7 @@ if($firstDayOfMonthInWeek == 6){
                 foreach ($monthsList as $monthNumber => $monthName) {
                     // création de la variable $selectMonth
                     $selectedMonth = '';
-                    // je vérifie que l'année sélectionnée est = à l'année, pour que le mois seletionné reste affiché
+                    // je vérifie que l'année sélectionnée est = à l'année, pour que le mois selectionné reste affiché
                     if ($month == $monthNumber) {
                         $selectedMonth = 'selected';
                     }
@@ -50,7 +51,7 @@ if($firstDayOfMonthInWeek == 6){
             <select name="years">
                 <?php
                 // boucle pour parcourir les années.
-                for ($years = 2011; $years <= 2050; $years++) {
+                for ($years = 2015; $years <= 2020; $years++) {
                     // création de la variable $selected
                     $selectedYear = '';
                     // je vérifie que l'année sélectionnée est = à l'année.

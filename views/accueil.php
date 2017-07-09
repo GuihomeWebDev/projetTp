@@ -16,12 +16,6 @@
             </a>
         </li>
         <li>
-            <a href="?page=fbf">
-                <img src="assets/pictures/fbf.jpeg" alt=""/>
-                <span>la fédération des bikers de France</span>
-            </a>
-        </li>
-        <li>
             <a href="?page=calendar">
                 <img src="assets/pictures/calendar.png" alt=""/>
                 <span>Calendrier </span>
