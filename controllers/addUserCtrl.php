@@ -69,21 +69,10 @@ if (isset($_POST['save']))
         if ($user->addUser())
         {
             $_SESSION["isConnected"] =  $user->login;
-          
+            $_SESSION['idUser'] = $user->id;
             header("Location: http://projetTP/?page=memberArea");
             exit;
         }
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <link href="../assets/css/addUsers.css" rel="stylesheet" type="text/css"/>
-        <title>title</title>
-    </head>
-    <body>
-
-    </body>
-</html>

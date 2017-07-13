@@ -6,12 +6,7 @@
         <title>title</title>
     </head>
     <body>
-
-    </body>
-</html>
-
-
-<div class="container">
+    <div class="container">
         <div class="row" >
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -76,3 +71,5 @@
     </div>
 </div>
 <!--FIN CAROUSEL-->
+</body>
+</html>

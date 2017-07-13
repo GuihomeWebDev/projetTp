@@ -2,24 +2,37 @@
     <h1><span>Un site de biker pour les bikers</span></h1>
     <div id="featured">
     </div>
-    <ul>
-        <li>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
             <a href="?page=gallery">
                 <img src="assets/pictures/decouvrir.jpeg" alt=""/>
-                <span>Ambiance bikers"</span>
+                
             </a>
-        </li>
-        <li>
+        </div>
+            <div class="col-md-4">
             <a href="?page=hellsWeek">
                 <img src="assets/pictures/hellsWeek.jpeg" alt=""/>
-                <span>Découvrez la Hells week</span>
+                
             </a>
-        </li>
-        <li>
+        </div>
+            <div class="col-md-4">
             <a href="?page=calendar">
                 <img src="assets/pictures/calendar.png" alt=""/>
-                <span>Calendrier </span>
+                
             </a>
-        </li>
-    </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <span>Ambiance bikers"</span>
+            </div>
+            <div class="col-md-4">
+                <span>Découvrez la Hells week</span>
+            </div>
+            <div class="col-md-4">
+               <span>Calendrier </span>
+            </div>
+        </div>
+    </div>
 </div>

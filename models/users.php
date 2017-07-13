@@ -6,7 +6,7 @@ class users extends database {
     public $mail = '';
     public $login = '';
     public $password = '';
-    
+    public $id = 0;
 
     /**
      * Déclaration de la méthode magique construct.
@@ -23,12 +23,17 @@ class users extends database {
      */
     public function addUser()
     {
+        $isOk = FALSE;
         $insert = 'INSERT INTO `JLpeLJpmTp_users` (`login`,`password`,`mail`) VALUES(:login, :password, :mail)';
         $queryPrepare = $this->pdo->prepare($insert);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
         $queryPrepare->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        return $queryPrepare->execute();
+        if($queryPrepare->execute()){
+            $this->id = $this->pdo->lastInsertId();
+            $isOk = TRUE;
+        }
+        return $isOK;
     }
 
     /**
@@ -36,8 +41,8 @@ class users extends database {
      */
     public function getHashByUser()
     {
-        $isOk = false;
-        $select = 'SELECT `password` FROM `JLpeLJpmTp_users` WHERE `login` = :login';
+        $isOk = FALSE;
+        $select = 'SELECT `password`,`id` FROM `JLpeLJpmTp_users` WHERE `login` = :login';
         $queryPrepare = $this->pdo->prepare($select);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
         //Si la requête s'éxecute sans erreur
@@ -50,6 +55,7 @@ class users extends database {
             {
                 //On donne à l'attribut de notre objet créé dans le controller la valeur de l'attribut password de notre objet resultat
                 $this->password = $result->password;
+                $this->id = $result->id;
                 //On passe notre variable à true, pour dire qu'il n'y a pas d'erreur
                 $isOk = true;
             }

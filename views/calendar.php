@@ -105,5 +105,4 @@ if($firstDayOfMonthInWeek == 6){
 
             </tbody>
         </table>
-    </body>
-</html>
+    
