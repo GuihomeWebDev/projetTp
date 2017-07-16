@@ -24,8 +24,8 @@ if (isset($_POST['deleteMember']))
  * @return mixed
  */
 function isValidateDate($testDate) {
-    $d = DateTime::createFromFormat('d/m/Y', $testDate);
-    return ($d && $d->format('d/m/Y') == $testDate) ? date_format(date_create_from_format('d/m/Y', $testDate), 'Y-m-d') : false;
+    $d = DateTime::createFromFormat('d-m-Y', $testDate);
+    return ($d && $d->format('d-m-Y') == $testDate) ? date_format(date_create_from_format('d-m-Y', $testDate), 'Y-m-d') : false;
 }
 
 //instanciation de l objet event
@@ -49,6 +49,7 @@ if(!$eventsList){
     //alors $eventsList = FALSE (voir memberArea.php)
     $hasEvents = FALSE;
 }
+//vérification du format de la date de debut
 if (!empty($_POST['startDate'])) {
     $startDate = isValidateDate($_POST['startDate']);
     if (!$startDate) {
@@ -57,8 +58,14 @@ if (!empty($_POST['startDate'])) {
         $event->startDate = $startDate;
     }
 }
+//vérification ddu format de la date de fin
 if (!empty($_POST['endDate'])) {
-    
+    $startDate = isValidateDate($_POST['endDate']);
+    if (!$startDate) {
+        $errorList['endDate'] = 'mauvais format date';
+    } else {
+        $event->endDate = $endDate;
+    }
 }
 //ajouts d'évènements dans la BDD
 if(isset($_POST['create'])){
@@ -85,3 +92,29 @@ if(isset($_POST['create'])){
         }    
     $event->addEvents();
 }
+//modification d'évènements dans la table
+if(isset($_POST['update'])){
+    if (!empty($_POST['name'])){
+        $event->name = strip_tags($_POST['name']);        
+        }    
+        if (!empty($_POST['startDate'])) {
+        $event->startDate = strip_tags($_POST['startDate']);        
+        }    
+        if (!empty($_POST['startTime'])) {
+        $event->startTime = strip_tags($_POST['startTime']);        
+        }    
+        if (!empty($_POST['endDate'])) {
+        $event->endDate = strip_tags($_POST['endDate']);        
+        }    
+        if (!empty($_POST['description'])) {
+        $event->description = strip_tags($_POST['description']);        
+        }     
+        if (!empty($_POST['location'])) {
+        $event->location = strip_tags($_POST['location']);        
+        }    
+        if (!empty($_POST['contribution'])) {
+        $event->contribution = strip_tags($_POST['contribution']);        
+        }    
+    $event->editEvents();
+}
+

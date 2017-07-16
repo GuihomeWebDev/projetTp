@@ -1,4 +1,4 @@
-$(function () {
+$(function () {    
     //L'evenement blur fonctionne au moment où le champ perd le focus
     $('#login').blur(function () {
         /**La méthode post attends plusieurs instructions : 
@@ -26,7 +26,7 @@ $(function () {
                     }
                 },
                 'JSON');
-    });
+    });    
 });
 
 

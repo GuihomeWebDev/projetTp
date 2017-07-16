@@ -7,7 +7,7 @@ include_once 'models/events.php';
 <div class="container text-center formDelete">
     <div class="row">
         <div class="col-md-12">
-            <h1>Bienvenu <?= $_SESSION["isConnected"] ?></h1>
+            <h1>Bienvenue <?= $_SESSION["isConnected"] ?></h1>
         </div>
     </div>
 </div>
@@ -40,43 +40,43 @@ include_once 'models/events.php';
                         <label class="label" for="name" > Intitulé :</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="name" id="name" placeholder="Nom de l'évènement"value="<?=$event->name?>">
+                        <input type="text" name="name" id="name" placeholder="Nom de l'évènement"value="<?= $event->name ?>">
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="startDate" > Date de début :</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="startDate" id="startDate" data-provide="datepicker" data-date-format="mm/dd/yyyy" value="<?=$event->startDate?>">
+                        <input type="text" id="startDate"type="text" value="<?= $event->startDate ?>">
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="startTime"> Heure de début :</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="startTime" id="startTime" data-mask="99:99:00" value="<?=$event->startTime?>">
+                        <input type="text" name="startTime" id="startTime" data-mask="99:99:00" value="<?= $event->startTime ?>">
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="endDate" >date de fin :</label>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" name="endDate" id="endDate" data-provide="datepicker" data-date-format="mm/dd/yyyy" value="<?=$event->endDate?>">
+                    <div class="col-md-5">      
+                        <input type="text" id="endDate"type="text" value="<?= $event->endDate ?>">
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="description" >Description:</label>
                     </div>
                     <div class="col-md-5">
-                        <textarea type="text" name="description" id="description" placeholder="Déscription des féstivités" value="<?=$event->description?>"></textarea>
+                        <textarea type="text" name="description" id="description" placeholder="Déscription des féstivités" value="<?= $event->description ?>"></textarea>
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="location" >Ville ou se situe l'évènement:</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="location" id="location" placeholder="Adresse" value="<?=$event->location?>">
+                        <input type="text" name="location" id="location" placeholder="Adresse" value="<?= $event->location ?>">
                     </div>
                     <div class="col-md-5">
                         <label class="label" for="contribution" >coût de l'entrée :</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?=$event->contribution?>">
+                        <input type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?= $event->contribution ?>">
                     </div>
                     <div class="col-md-5">
                         <input type="submit" id="btnRegister" name="create" value="Enregistrer"/>
@@ -84,7 +84,6 @@ include_once 'models/events.php';
                 </form>
             </div>
         </div>
-
         <div id="update" class="tabcontent">
             <h2>Modifier un évènement</h2>
             <div class="row">
@@ -97,46 +96,46 @@ include_once 'models/events.php';
                                 <label class="label" for="name" > Intitulé :</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="name" id="name" placeholder="Nom de l'évènement"/>
+                                <input type="text" name="name" id="name" placeholder="Nom de l'évènement"value="<?= $event->name ?>">
                             </div>
                             <div class="col-md-5">
                                 <label class="label" for="startDate" > Date de début :</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="startDate" id="startDate" placeholder="JJ/MM/AAAA"/>
+                                <input type="text" id="startDateModify"type="text" value="<?= $event->startDate ?>">
                             </div>
                             <div class="col-md-5">
-                                <label class="label" for="startTime"> Heure début :</label>
+                                <label class="label" for="startTime"> Heure de début :</label>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="startTime" id="startTime" placeholder=" 15H00"/>
+                                <input type="text" name="startTime" id="startTime" data-mask="99:99:00" value="<?= $event->startTime ?>">
                             </div>
                             <div class="col-md-5">
-                                <label class="label" for="end" >date de fin :</label>
+                                <label class="label" for="endDate" >date de fin :</label>
+                            </div>
+                            <div class="col-md-5">      
+                                <input type="text" id="endDateModify"type="text" value="<?= $event->endDate ?>">
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="end" id="end" placeholder="JJ/MM/AAAA"/>
+                                <label class="label" for="description" >Description:</label>
                             </div>
                             <div class="col-md-5">
-                                <label class="label" for="describe" >Description:</label>
+                                <textarea type="text" name="description" id="description" placeholder="Déscription des féstivités" value="<?= $event->description ?>"></textarea>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="describe" id="describe" placeholder="Déscription"/>
+                                <label class="label" for="location" >Ville ou se situe l'évènement:</label>
                             </div>
                             <div class="col-md-5">
-                                <label class="label" for="locate" >localité:</label>
+                                <input type="text" name="location" id="location" placeholder="Adresse" value="<?= $event->location ?>">
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="locate" id="locate" placeholder="Adresse"/>
+                                <label class="label" for="contribution" >coût de l'entrée :</label>
                             </div>
                             <div class="col-md-5">
-                                <label class="label" for="contrib" >coût de l'entrée :</label>
+                                <input type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?= $event->contribution ?>">
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="contrib" id="contrib" placeholder="coût de l'entrée "/>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="submit" id="btnRegister" name="create" value="Enregistrer"/>
+                                <input type="submit" id="update" name="update" value="Modifier"/>
                             </div>
                         </form>
                     <?php } else {
@@ -166,5 +165,17 @@ include_once 'models/events.php';
         </div> 
     </div>
 </div>
-
-<script src="../assets/js/tabs.js" type="text/javascript"></script>    
+<link href="../assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="../assets/js/jquery.ui.datepicker-fr.js" type="text/javascript"></script>
+<script src="../assets/js/tabs.js" type="text/javascript"></script>  
+<script>
+                $(function () {
+                    $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker($.datepicker.regional[ "fr" ]);
+                    $("#locale").on("change", function () {
+                        $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker("option",
+                                $.datepicker.regional[ $(this).val() ]);
+                    });
+                });
+</script>

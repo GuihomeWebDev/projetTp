@@ -1,108 +1,88 @@
-<?php
-$monthsList = array('01' => 'janvier', '02' => 'février', '03' => 'mars', '04' => 'avril', '05' => 'mai', '06' => 'juin', '07' => 'juillet', '08' => 'août', '09' => 'septembre', '10' => 'octobre', '11' => 'novembre', '12' => 'décembre');
-$year = 1900; // on initialise la var année par défaut on met la 1ere année
-$month = 1;    // on initialise la var mois par défaut on met le 1er mois
-// récuperation des données en POST
-if (isset($_POST['years'])) {
-    $year = $_POST['years'];
-}
-if (isset($_POST['months'])) {
-    $month = $_POST['months'];
-}
-// on récupère le nbre de jrs ds le mois.
-$NumberDaysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-// on récup le jr de la semaine du 1er jours du mois
-$firstDayOfMonthInWeek = date('N', mktime(0, 0, 0, $month, 1, $year));
-$start = 0;
-if($firstDayOfMonthInWeek == 6){
-    $start = 2;
-}elseif ($firstDayOfMonthInWeek == 7) {
-    $start = 3;
-}
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <link href="/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
-        <title>Calendrier</title>
-    </head>
-    <body>
-        <form action="../views/calendar.php" method="POST">
-            <!-- création de la liste déroulante pour les mois-->
-            <select name="months">
-                <?php
-                // boucle pour parcourir le tabl des mois
-                foreach ($monthsList as $monthNumber => $monthName) {
-                    // création de la variable $selectMonth
-                    $selectedMonth = '';
-                    // je vérifie que l'année sélectionnée est = à l'année, pour que le mois selectionné reste affiché
-                    if ($month == $monthNumber) {
-                        $selectedMonth = 'selected';
+        <?php       
+        include_once 'config.php';
+        include_once 'class/classCalendar.php';
+        $date = new Date();
+        $year = date('Y');
+        $events = $date->getEvents($year);
+        $dates = $date->getAll($year);
+        ?>
+<link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
+        <div class="periods">
+            <div class="year"><?php echo $year; ?></div>
+            <div class="months">
+                <ul>
+                    <?php foreach ($date->months as $id => $m): ?>
+                        <li><a href="#" id="linkMonth<?php echo $id + 1; ?>"><?php echo utf8_encode(substr(utf8_decode($m), 0, 3)); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <?php $dates = current($dates); ?>
+            <?php foreach ($dates as $m => $days): ?>
+                <div class="month relative" id="month<?php echo $m; ?>">
+                    <table>
+                        <thead>
+                            <tr>
+                                <?php foreach ($date->days as $d): ?>
+                                    <th><?php echo substr($d, 0, 3); ?></th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <?php $end = end($days);
+                                foreach ($days as $d => $w): ?>
+                                    <?php $time = strtotime("$year-$m-$d"); ?>
+                                    <?php if ($d == 1 && $w != 1): ?>
+                                        <td colspan="<?php echo $w - 1; ?>" class="padding"></td>
+        <?php endif; ?>
+                                    <td<?php if ($time == strtotime(date('Y-m-d'))): ?> class="today" <?php endif; ?>>
+                                        <div class="relative">
+                                            <div class="day"><?php echo $d; ?></div>
+                                        </div>
+                                        <div class="daytitle">
+        <?php echo $date->days[$w - 1]; ?> <?php echo $d; ?>  <?php echo $date->months[$m - 1]; ?>
+                                        </div>
+                                        <ul class="events">
+                                            <?php if (isset($events[$time])): foreach ($events[$time] as $e): ?>
+                                                    <li><?php echo $e; ?></li>
+            <?php endforeach;
+        endif; ?>
+                                        </ul>
+                                    </td>
+                                    <?php if ($w == 7): ?>
+                                    </tr><tr>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php if ($end != 7): ?>
+                                    <td colspan="<?php echo 7 - $end; ?>" class="padding"></td>
+    <?php endif; ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+<?php endforeach; ?>
+        </div>
+        <div class="clear"></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $('.month').hide();
+                $('.month:first').show();
+                $('.months a:first').addClass('active');
+                var current = 1;
+                $('.months a').click(function () {
+                    var month = $(this).attr('id').replace('linkMonth', '');
+                    if (month != current) {
+                        $('#month' + current).slideUp();
+                        $('#month' + month).slideDown();
+                        $('.months a').removeClass('active');
+                        $('.months a#linkMonth' + month).addClass('active');
+                        current = month;
                     }
-                    ?>
-                    <option  <?= $selectedMonth ?> value="<?= $monthNumber ?>"><?= $monthName ?></option>
-                    <?php
-                }
-                ?>
-            </select>
-            <!--création de la liste déroulante pour les années-->
-            <select name="years">
-                <?php
-                // boucle pour parcourir les années.
-                for ($years = 2015; $years <= 2020; $years++) {
-                    // création de la variable $selected
-                    $selectedYear = '';
-                    // je vérifie que l'année sélectionnée est = à l'année.
-                    if ($year == $years) {
-                        $selectedYear = 'selected';
-                    }
-                    ?>
-                    <option  <?= $selectedYear ?> value="<?= $years ?>"><?= $years ?></option>
-                    <?php
-                }
-                ?>
-            </select>
-            <input type="submit" value="Valider" />
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>Vendredi</th>
-                    <th>Samedi</th>
-                    <th>Dimanche</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-               <?php
-               $currentDay = 1;
-               // on crée la boucle qui sert à créer une cellule par jrs.
-                    for ($day = 1; $day <= $NumberDaysInMonth; $day++) {
-                      $DayPosition = date('N', mktime(0, 0, 0, $month, $currentDay, $year));
-                       // pour revenir a la ligne si multiple de 7.
-                      if($day < $start){?><td></td>
-                              <?php 
-                      }elseif($DayPosition == 1){
-                           ?></tr><tr><?php
-                           $day += 4 -$DayPosition;
-                           $currentDay += 5 -$DayPosition;
-                       }elseif ($DayPosition != 5 && $DayPosition != 6 && $DayPosition != 7) {
-                         $day += 4 -$DayPosition;
-                         $currentDay += 5 -$DayPosition;
-                       }
-                       else{
-                         ?>
-                         <td><?= $currentDay;
-                         $currentDay++;
-                         ?></td>
-                         <?php
-                       }
-                    }
-                        ?>
-                </tr>
-
-            </tbody>
-        </table>
-    
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

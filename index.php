@@ -11,10 +11,9 @@ include_once 'controllers/indexCtrl.php';
     <head>
         <meta charset="UTF-8">
         <title>Bikers events</title>
-        <link href="/assets/library/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-        <link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/bootstrap-datepicker3.standalone.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/library/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/library/bootstrap/css/bootstrap.css" rel="stylesheet"/>              
+        <link href="assets/library/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>        
+        <link href="assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>        
         <link href="/assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -83,9 +82,8 @@ include_once 'controllers/indexCtrl.php';
         </div>
         <script src="assets/library/jquery-3.1.1.min.js" type="text/javascript"></script>
         <script src="assets/library/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/library/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="assets/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script src="assets/library/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>         
+
     </body>
 </html>
 

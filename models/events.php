@@ -6,9 +6,8 @@ class events extends database {
 //déclaration des attributs de la class reprenant les champs de la table events
     public $id = 0;
     public $name = '';
-    public $startDate = '01/01/2000';
-    public $startTime = 0;
-    public $endDate = '01/01/2000';
+    public $startDate = '01-01-2000';
+    public $endDate = '01-01-2000';
     public $description = '';
     public $location = '';
     public $contribution = 0;
@@ -28,7 +27,7 @@ class events extends database {
      */
     public function addEvents() {
         //requete SQL qui permet d'ajouter une ligne dans la table nommé avec un préfix  JLpeLJpmTp_events 
-        $insert = 'INSERT INTO `JLpeLJpmTp_events` (`name`,`startDate`, `startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers`) VALUES (:name,STR_TO_DATE(:startDate,\'%d/%m/%Y\'),:startTime,STR_TO_DATE(:endDate,\'%d/%m/%Y\'),:description,:location,:contribution, :idUsers)';
+        $insert = 'INSERT INTO `JLpeLJpmTp_events` (`name`,`startDate`, `startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers`) VALUES (:name,STR_TO_DATE(:startDate,\'%d-%m-%Y\'),:startTime,STR_TO_DATE(:endDate,\'%d-%m-%Y\'),:description,:location,:contribution, :idUsers)';
         //préparation de la requete sql 
         $queryPrepare = $this->pdo->prepare($insert);
         //liaison de la valeur entrée par  l'utilisiteur est stoké dans le marqueur nominatif et envoyé dans le champs de la table
