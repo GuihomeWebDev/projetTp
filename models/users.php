@@ -33,7 +33,7 @@ class users extends database {
             $this->id = $this->pdo->lastInsertId();
             $isOk = TRUE;
         }
-        return $isOK;
+        return $isOk;
     }
 
     /**

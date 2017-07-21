@@ -60,7 +60,8 @@ if (isset($_POST['save']))
     }
     else
     {
-        //Si un des $_POST est vide ou que les mots de passes ne sont pas identiques, on passe $userError à true (nous permet d'afficher notre message d'erreur dans la vue)
+        //Si un des $_POST est vide ou que les mots de passes ne sont pas identiques, on passe $userError à true 
+        //(nous permet d'afficher notre message d'erreur dans la vue)
         $userError = true;
     }
     //S'il n'y a pas d'erreur, on ajoute l'utilisateur

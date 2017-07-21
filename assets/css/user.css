@@ -1,0 +1,27 @@
+
+
+body {
+    background: url(../pictures/connection.jpeg) no-repeat fixed;
+    background-size: cover !important;
+    width: 100%;
+    
+    }
+label{
+    margin-top: 100px;
+    color: white;
+    font-size: 30px;
+    
+}
+
+/*Début css ajax login*/
+#error,#success{
+    display: none;
+}
+#error{
+    color:red;
+}
+#success{
+    color:green;
+}
+/*Fin css ajax login*/
+

@@ -34,14 +34,14 @@ include_once 'controllers/indexCtrl.php';
                         if (isset($_SESSION['isConnected'])) {
                             ?>
                             <li><a href="?page=calendar">Calendrier évenements</a></li>
-                            <li><a  href="?page=gallery">Galerie</a></li>
-                            <li><a  href="/?page=memberArea">Espace membre</a></li>
-                            <li><a  href="/?action=logOut">Déconnexion</a></li>
+                            <li><a href="?page=neophite">Neophite</a></li>
+                            <li><a href="/?page=memberArea">Espace membre</a></li>
+                            <li><a href="/?action=logOut">Déconnexion</a></li>
                             <?php
                         } else {
                             ?>
                             <li><a href="?page=calendar">calendrier évenements</a></li>
-                            <li><a  href="?page=gallery">galerie</a></li>
+                            <li><a  href="?page=neophite">neophite</a></li>
                             <li><a  href="?page=addUser">inscription</a></li>
                             <li><a  href="?page=user">connexion</a></li>
                         </ul>
@@ -54,9 +54,9 @@ include_once 'controllers/indexCtrl.php';
 //            on verifie si page passe dans l url
             if (isset($_GET['page'])) {
                 //avec la fonction strcmp on verifie l'égalité entre les 2 chaines de carractere passés en GET
-                if (strcmp($_GET['page'], 'gallery') == 0) {
+                if (strcmp($_GET['page'], 'neophite') == 0) {
                     //si l' égalité est vérifiée on inclu la page
-                    include_once 'views/gallery.php';
+                    include_once 'views/neophite.php';
                 }
                 if (!strcmp($_GET['page'], 'user')) {
                     include_once 'views/user.php';
@@ -72,6 +72,15 @@ include_once 'controllers/indexCtrl.php';
                 }
                 if (!strcmp($_GET['page'], 'memberArea')) {
                     include_once 'views/memberArea.php';
+                }
+                if (!strcmp($_GET['page'], 'neophite')) {
+                    include_once 'views/neophite.php';
+                }
+                if (!strcmp($_GET['page'], 'biker')) {
+                    include_once 'views/biker.php';
+                }
+                 if (!strcmp($_GET['page'], 'testcalendar')) {
+                    include_once 'views/testcalendar.php';
                 }
             }
 // sinon retour à la page d'acceuil

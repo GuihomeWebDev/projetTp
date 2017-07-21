@@ -28,7 +28,7 @@ if ($userError) {
             <input type="password" name="password" id="password"/>
             <label for="confirmPassword">Confirmer le mot de passe :</label>
             <input type="password" name="confirmPassword" id="confirmPassword"/>
-            <input type="submit" name="save" value="Enregistrer"/>
+            <input type="submit" name="save" id="input"value="Enregistrer"/>
         </form>
     </body>
 </html>

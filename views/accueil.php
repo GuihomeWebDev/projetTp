@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-            <a href="?page=gallery">
+            <a href="?page=neophite">
                 <img src="assets/pictures/decouvrir.jpeg" alt=""/>
                 
             </a>
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <span>Ambiance bikers"</span>
+                <span>Un Peu de Culture</span>
             </div>
             <div class="col-md-4">
                 <span>Découvrez la Hells week</span>

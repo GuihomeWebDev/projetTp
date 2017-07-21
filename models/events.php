@@ -7,6 +7,7 @@ class events extends database {
     public $id = 0;
     public $name = '';
     public $startDate = '01-01-2000';
+    public $startTime='';
     public $endDate = '01-01-2000';
     public $description = '';
     public $location = '';
@@ -39,7 +40,7 @@ class events extends database {
         $queryPrepare->bindValue(':location', $this->location, PDO::PARAM_STR);
         $queryPrepare->bindValue(':contribution', $this->contribution, PDO::PARAM_STR);
         $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
-        //la methode retourne un boolean qui verifi si la requete a été executé ou pas.
+        //la methode retourne un boolean qui verifie si la requete a été executé ou pas.
         return $queryPrepare->execute();
     }
 
@@ -48,8 +49,8 @@ class events extends database {
      * 
      */
     public function editEvents() {
-        $insert = 'UPDATE `JLpeLJpmTp_events` SET `name`=:name,`startDate`=:startDate,`startTime`=:startTime,`endDate`=:endDate,`description`=:description,`location`=:location,`contribution`=:contribution,`idUser`=:idUser WHERE `id`=:id AND `idUser` = :idUser';
-        $queryPrepare = $this->pdo->prepare($insert);
+        $update = 'UPDATE `JLpeLJpmTp_events` SET `name`=:name,`startDate`=STR_TO_DATE(:startDate,\'%d-%m-%Y\'),`startTime`=:startTime,`endDate`=STR_TO_DATE(:endDate,\'%d-%m-%Y\'),`description`=:description,`location`=:location,`contribution`=:contribution WHERE `id`=:id AND `idUsers` = :idUsers';
+        $queryPrepare = $this->pdo->prepare($update);
         $queryPrepare->bindValue(':name', $this->name, PDO::PARAM_STR);
         $queryPrepare->bindValue(':startDate', $this->endDate, PDO::PARAM_STR);
         $queryPrepare->bindValue(':startTime', $this->startTime, PDO::PARAM_STR);
@@ -57,7 +58,8 @@ class events extends database {
         $queryPrepare->bindValue(':description', $this->description, PDO::PARAM_STR);
         $queryPrepare->bindValue(':location', $this->location, PDO::PARAM_STR);
         $queryPrepare->bindValue(':contribution', $this->contribution, PDO::PARAM_INT);
-        $queryPrepare->bindValue(':idUser', $this->idUser, PDO::PARAM_INT);
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         return $queryPrepare->execute();
     }
 
@@ -66,8 +68,8 @@ class events extends database {
      * 
      */
     public function removeEvents() {
-        $insert = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUser` = :idUser';
-        $queryPrepare = $this->pdo->prepare($insert);
+        $delete = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUser` = :idUser';
+        $queryPrepare = $this->pdo->prepare($delete);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryPrepare->bindValue(':idUser', $this->idUser, PDO::PARAM_INT);
         return $queryPrepare->execute();
@@ -78,9 +80,37 @@ class events extends database {
      * 
      */
     public function getEvents() {
-        $insert = 'SELECT `id`,`name`,`startDate`,`startTime`,`endDate`,`description`,`location`,`contribution`,`idUser` FROM  `JLpeLJpmTp_events`';
-        $query = $this->pdo->query($insert);
+        $add = 'SELECT `id`,`name`,`startDate`,`startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events`';
+        $query = $this->pdo->query($add);
         return $query != false ? $query->fetchALL(PDO::FETCH_OBJ) : false;
     }
-
+    /**
+     * déclaration de la méthode getEventsByDate permet d'afficher la liste d'evenements par la date
+     * 
+     */
+    public function getEventsByDate() {
+        $add = 'SELECT `id`,`name`,`startDate`,`startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events` WHERE `startDate` = :startDate';
+        $queryPrepare = $this->pdo->prepare($add);
+        $queryPrepare->bindValue(':startDate', $this->startDate, PDO::PARAM_STR);
+        $queryPrepare->execute();
+        return $queryPrepare != false ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : false;
+    }
+    /**
+     * déclaration de la méthode getEventsByDate permet d'afficher la liste d'evenements par id de l'untilisateur
+     * 
+     */
+    public function getEventsByUserId() {
+        $add = 'SELECT `id`,`name`,`startDate`,`startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events` WHERE `idUsers` = :idUsers';
+        $queryPrepare = $this->pdo->prepare($add);
+        $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
+        $queryPrepare->execute();
+        return $queryPrepare != false ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : false;
+    }
+    public function getEventsById() {
+        $add = 'SELECT `id`,`name`,DATE_FORMAT(`startDate`, \'%d-%m-%Y\') AS startDate, `startTime`,DATE_FORMAT(`endDate`, \'%d-%m-%Y\') AS endDate,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events` WHERE `id` = :id';
+        $queryPrepare = $this->pdo->prepare($add);
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $queryPrepare->execute();
+        return $queryPrepare != false ? $queryPrepare->fetch(PDO::FETCH_OBJ) : false;
+    }
 }

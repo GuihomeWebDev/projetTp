@@ -384,3 +384,7 @@ p a:hover {
     color:green;
 }
 /*Fin css ajax login*/
+span{
+    color: white;
+    font-size: 20px;
+}

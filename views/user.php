@@ -5,7 +5,7 @@ include_once 'class/database.php';
 include_once 'models/users.php';
 include_once 'controllers/userCtrl.php';
 ?>
-<link href="../assets/css/connection.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/css/user.css" rel="stylesheet" type="text/css"/>
 <form action="/?page=user" method="POST">
     <p>
         <label for="login">Nom d'utilisateur :</label>
@@ -21,5 +21,6 @@ include_once 'controllers/userCtrl.php';
         <input type="submit" name="connection" value="Connexion"/>
     </p>
 </form>
+<script src="../assets/js/ajax.js" type="text/javascript"></script>
 </body>
 </html>

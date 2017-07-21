@@ -1,0 +1,11 @@
+body {
+    background: url(../pictures/gallery.jpg) no-repeat fixed;
+    background-size: cover !important;
+    width: 100%;
+    
+}
+p{
+   color:red;
+    font-size: 25px;
+    font-weight: bold; 
+}
