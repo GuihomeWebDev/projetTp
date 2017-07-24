@@ -46,7 +46,7 @@ $(function () {
                     //qui permet d'ajouter(append) tout ce qui va bien.
                     jQuery.each(events, function () {
                         //on rempli la modal avec le json
-                        $('.modal-body').append('<ul class="list-unstyled test delete"><li>'+'Nom de l\'événement : ' + this.name + '</li><li>'+'Date de début : ' + this.startDate + '</li><li>'+'heure de début : ' + this.startTime + '</li><li>'+'date de fin : ' + this.endDate + '</li><li>'+'Description des festivités : ' + this.description + '</li><li>'+'Adresse :' + this.location + '</li><li>'+'Coût d\'entrée en euros : ' + this.contribution + '</li></ul>');
+                        $('.modal-body').append('<ul class="list-unstyled modalEvent delete"><li>'+'Nom de l\'événement :<br><span class="nameEvent"> ' + this.name + '</span></li><br><li>'+'Date de début : <br><span class="nameEvent">' + this.startDate + '</span></li><br><li>'+'heure de début : <br><span class="nameEvent">' + this.startTime + '</span></li><br><li>'+'date de fin : <br><span class="nameEvent">' + this.endDate + '</span></li><br><li>'+'Description des festivités : <br><span class="nameEvent">' + this.description + '</span></li><br><li>'+'Adresse : <br><span class="nameEvent"> ' + this.location + '</span></li><br><li>'+'Coût d\'entrée en euros : <br><span class="nameEvent">' + this.contribution + '</span></li><br></ul>');
                     })
                 },
                 'JSON');

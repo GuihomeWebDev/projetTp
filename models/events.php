@@ -89,7 +89,7 @@ class events extends database {
      * 
      */
     public function getEventsByDate() {
-        $add = 'SELECT `id`,`name`,`startDate`,`startTime`,`endDate`,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events` WHERE `startDate` = :startDate';
+        $add = 'SELECT `id`,`name`,DATE_FORMAT(`startDate`, \'%d-%m-%Y\') AS startDate, `startTime`,DATE_FORMAT(`endDate`, \'%d-%m-%Y\') AS endDate,`description`,`location`,`contribution`,`idUsers` FROM  `JLpeLJpmTp_events` WHERE `startDate` = :startDate';
         $queryPrepare = $this->pdo->prepare($add);
         $queryPrepare->bindValue(':startDate', $this->startDate, PDO::PARAM_STR);
         $queryPrepare->execute();

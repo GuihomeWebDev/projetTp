@@ -35,7 +35,8 @@ include_once 'controllers/indexCtrl.php';
                             ?>
                             <li><a href="?page=calendar">Calendrier évenements</a></li>
                             <li><a href="?page=neophite">Neophite</a></li>
-                            <li><a href="/?page=memberArea">Espace membre</a></li>
+                            <li><a href="/?page=memberArea">Espace membre</a></li>                                                          
+                            <li><a href="/?page=profil">Modifier votre profil</a></li>                                                          
                             <li><a href="/?action=logOut">Déconnexion</a></li>
                             <?php
                         } else {
@@ -79,8 +80,8 @@ include_once 'controllers/indexCtrl.php';
                 if (!strcmp($_GET['page'], 'biker')) {
                     include_once 'views/biker.php';
                 }
-                 if (!strcmp($_GET['page'], 'testcalendar')) {
-                    include_once 'views/testcalendar.php';
+                 if (!strcmp($_GET['page'], 'profil')) {
+                    include_once 'views/profil.php';
                 }
             }
 // sinon retour à la page d'acceuil

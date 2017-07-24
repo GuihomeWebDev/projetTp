@@ -84,10 +84,10 @@ class users extends database {
 
     public function deleteMember()
     {
-        $delete = 'DELETE FROM `JLpeLJpmTp_users` WHERE `mail` = :mail';
+        $delete = 'DELETE FROM `JLpeLJpmTp_users` WHERE `mail` = :mail AND `id` = :id';
         $queryPrepare = $this->pdo->prepare($delete);
         $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryPrepare->execute();
     }
 

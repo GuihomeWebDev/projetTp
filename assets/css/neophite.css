@@ -2,10 +2,22 @@ body {
     background: url(../pictures/gallery.jpg) no-repeat fixed;
     background-size: cover !important;
     width: 100%;
-    
+}
+.titleNeophite{
+    font-family: 'Rock Salt', cursive;
+    color: white;
+    margin-top: 50px; 
+    margin-bottom: 50px;
+}
+.textNeophite{
+    background-color: rgba(0, 0, 0, 0.5);
 }
 p{
-   color:red;
-    font-size: 25px;
-    font-weight: bold; 
+    color:white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Itim', cursive;
+}
+.spaceText{
+    margin-top: 80px; 
 }

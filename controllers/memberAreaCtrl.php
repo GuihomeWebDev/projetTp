@@ -9,23 +9,6 @@ if (isset($_POST['eventUpdate'])) {
     echo json_encode(array('events' => $event->getEventsById()));
     //utilisation sans ajax dans le else
 } else {
-//intanciation de user
-    $user = new users();
-//recuperation de id user 
-    $user->id = $_SESSION['idUser'];
-//si le boutton suppression et cliqué par l'utilisateur
-    if (isset($_POST['deleteMember'])) {//on verifi que le champ mail n'est pas vide
-        if (!empty($_POST['mail'])) {//on vérifie que le format mail est valide 
-            $user->mail = filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL);
-            //on execute la fonction deleteMember
-            $user->deleteMember();
-            //une fois le compte supprimé on déconnecte l' utilisateur
-            unset($_SESSION);
-            session_destroy();
-            header("Location: http://projetTP/");
-        }
-    }
-
     /**
      * fonction qui formate la date au format jours/mois/année et qui la restitue au format année-mois-jours et qui verifie que c'est bien une date
      * en cas d'erreur elle revoie false

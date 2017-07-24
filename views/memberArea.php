@@ -11,19 +11,6 @@ include_once 'models/events.php';
         </div>
     </div>
 </div>
-<form action="/?page=memberArea" method="POST">
-    <div class="row">
-        <div class="col-md-5">
-            <label class="label del" for="delete">Entrez votre mail pour supprimer votre compte :</label>
-        </div>
-        <div class="col-md-4">
-            <input type="text" name="mail" id="delete"/>
-        </div>
-        <div class="col-md-3">
-            <input type="submit" id="btnDelete" name="deleteMember" value="supprimer"/>
-        </div>
-    </div>
-</form>
 <div class="container tabEvent">
     <div class="row">
         <div class="tab">
