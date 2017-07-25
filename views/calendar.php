@@ -46,7 +46,8 @@ include_once 'models/events.php';
                                 <ul class="events">
                                     <?php foreach ($events as $e): ?>
                                         <?php if (strtotime($e->startDate) == $time): ?>
-                                    <li id="styleList"><ul class="list-unstyled test style">                                                    
+                                            <li id="styleList"><ul class="list-unstyled test style">  
+                                                    <li><?php echo $e->groupName; ?></li>
                                                     <li><?php echo $e->name; ?></li>
                                                     <li><?php echo $e->startDate; ?></li>
                                                     <li><?php echo $e->startTime; ?></li>

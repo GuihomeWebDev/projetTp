@@ -6,7 +6,7 @@ if(isset($_POST['timestamp'])){
     $date = new events();
     $date->startDate = date('Y-m-d', $_POST['timestamp']);
     $events = $date->getEventsByDate();
-    echo json_encode(array('events'=>$events));
+    echo json_encode(array('events'=>$events,'groupName' => 'toto'));
 } else {   
 function getAll($year) {
     $r = array();

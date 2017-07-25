@@ -2,6 +2,8 @@
 //Inclusion du model et du controller
 include_once 'class/database.php';
 include_once 'models/users.php';
+include_once 'models/groupType.php';
+include_once 'models/group.php';
 include_once 'controllers/addUserCtrl.php';
 ?>
 
@@ -28,6 +30,15 @@ if ($userError) {
             <input type="password" name="password" id="password"/>
             <label for="confirmPassword">Confirmer le mot de passe :</label>
             <input type="password" name="confirmPassword" id="confirmPassword"/>
+            <label for="groupType">selectionner votre type de groupe:</label>
+            <select name="groupType"  id="groupType">               
+                <?php foreach ($select as $groupType) { ?>
+                    <option value="<?= $groupType->id ?>"><?= $groupType->name ?></option>
+                    <?php }
+                ?>
+            </select>
+            <label for="groupName">indiquer le nom de votre groupe :</label>
+            <input type="text" name="groupName" id="groupName" value="<?=$group->name?>"/>
             <input type="submit" name="save" id="input"value="Enregistrer"/>
         </form>
     </body>

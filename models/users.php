@@ -7,6 +7,7 @@ class users extends database {
     public $login = '';
     public $password = '';
     public $id = 0;
+    public $id_group = 0;
 
     /**
      * Déclaration de la méthode magique construct.
@@ -24,11 +25,12 @@ class users extends database {
     public function addUser()
     {
         $isOk = FALSE;
-        $insert = 'INSERT INTO `JLpeLJpmTp_users` (`login`,`password`,`mail`) VALUES(:login, :password, :mail)';
+        $insert = 'INSERT INTO `JLpeLJpmTp_users` (`login`,`password`,`mail`,`id_group`) VALUES(:login, :password, :mail, :id_group)';
         $queryPrepare = $this->pdo->prepare($insert);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
         $queryPrepare->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':id_group', $this->id_group, PDO::PARAM_INT);
         if($queryPrepare->execute()){
             $this->id = $this->pdo->lastInsertId();
             $isOk = TRUE;

@@ -33,7 +33,7 @@ include_once 'controllers/indexCtrl.php';
                         <?php
                         if (isset($_SESSION['isConnected'])) {
                             ?>
-                            <li><a href="?page=calendar">Calendrier évenements</a></li>
+                            <li><a href="?page=calendar">Calendrier évenements</a></li>                            
                             <li><a href="?page=neophite">Neophite</a></li>
                             <li><a href="/?page=memberArea">Espace membre</a></li>                                                          
                             <li><a href="/?page=profil">Modifier votre profil</a></li>                                                          

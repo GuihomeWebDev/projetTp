@@ -50,7 +50,7 @@ if (isset($_POST['eventUpdate'])) {
             $event->startDate = $startDate;
         }
     }
-//vérification ddu format de la date de fin
+//vérification du format de la date de fin
     if (!empty($_POST['endDate'])) {
         $endDate = isValidateDate($_POST['endDate']);
         if (!$endDate) {
