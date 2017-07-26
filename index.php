@@ -35,7 +35,7 @@ include_once 'controllers/indexCtrl.php';
                             ?>
                             <li><a href="?page=calendar">Calendrier évenements</a></li>                            
                             <li><a href="?page=neophite">Neophite</a></li>
-                            <li><a href="/?page=memberArea">Espace membre</a></li>                                                          
+                            <li><a href="/?page=memberArea">Gestion des évènements</a></li>                                                          
                             <li><a href="/?page=profil">Modifier votre profil</a></li>                                                          
                             <li><a href="/?action=logOut">Déconnexion</a></li>
                             <?php

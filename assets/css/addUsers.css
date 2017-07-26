@@ -44,3 +44,10 @@ body {
 input{
     color:#000000;
 }
+select{
+    color: black;
+}
+p{
+    color: red;
+    font-size: 20px;
+}

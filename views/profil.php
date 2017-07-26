@@ -4,6 +4,7 @@ include_once 'controllers/profilCtrl.php';
 include_once 'models/users.php';
 ?>
 <link href="../assets/css/profil.css" rel="stylesheet" type="text/css"/>
+<h1>Espace personnel</h1>
 <div class="container text-center formDelete">
     <div class="row">
         <div class="col-md-12">
@@ -11,45 +12,70 @@ include_once 'models/users.php';
         </div>
     </div>
 </div>
-<form action="/?page=profil" method="POST">
-    <div class="row">
-        <div class="col-md-5">
-            <label class="label del" for="delete">Entrez votre mail pour supprimer votre compte :</label>
-        </div>
-        <div class="col-md-4">
-            <input type="text" name="mail" id="delete"/>
-        </div>
-        <div class="col-md-3">
-            <input type="submit" id="btnDelete" class="btn btn-danger" name="deleteMember" value="Supprimer votre compte"/>
-        </div>
-        <div class="col-md-3">
-            <label class="danger" for="deleteMember">Attention cette action est irreversible</label>
-        </div>
-    </div>
-</form>
 <div class="container">
-    <form class="login">
+    <form action="/?page=profil" method="POST" class="login row">
         <div class="row">
-            <div class="col-md-offset-3 col-md-5">
-                <label for="exampleInputEmail1">Modifier</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre adresse email">
+            <div class="col-md-5">
+                <label for="InputEmail1">Modifier votre email</label>
+                <input type="email" class="form-control" id="mail" name="mail" value="<?= $user->mail ?>">
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier mail"/>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-3 col-md-5">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+            <div class="col-md-5">
+                <label for="oldPassword">Ancien mot de passe</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Mot de passe">
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label for="newPassword">Nouveau mot de passe</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Mot de passe">
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label for="confirmPassword">Confirmer votre mot de passe</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Mot de passe">
             </div>
         </div>
-        <div class="col-md-offset-3 col-md-5">
-            <label for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier mot de passe"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label for="InputLogin">Modifier votre login</label>
+                <input type="text" class="form-control" id="Login" name="login" value="<?= $user->login ?>">
+            </div>
+        </div>  
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier login"/>
+            </div>
         </div>
     </form>
+</div>
+<div class="container">
+    <div class="row">
+        <form action="/?page=profil" method="POST" class="delete">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <label class="label del" for="delete">Pour supprimer votre compte :</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="mail" placeholder="Entrez votre email" id="delete" aria-describedby="helpBlock"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" id="btnDelete" class="btn btn-danger" name="deleteMember" value="Supprimer votre compte"/>
+                    <span id="helpBlock" class="help-block text-danger">ATTENTION</span>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

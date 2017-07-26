@@ -29,4 +29,5 @@ class group extends database {
     public function lastInsertId(){
         return $this->pdo->lastInsertId();
     }
-}
+    
+    }

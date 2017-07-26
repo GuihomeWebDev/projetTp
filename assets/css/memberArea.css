@@ -47,18 +47,18 @@ div.tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: inherit;
-    
+    float: left;
 }
-
+.tablinks{
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
 /* Style the buttons inside the tab */
 .tabEvent{
-    width: 50%;
     float: left;
     margin-top: 100px;
 }
 div.tab button {
     background-color: inherit;
-    float: left;
     border: none;
     outline: none;
     cursor: pointer;
@@ -81,10 +81,10 @@ div.tab button.active {
     display: none;
     padding: 6px 12px;
     border: 1px solid #ccc;
-    border-top: none;
 } 
 label, h2, p{
     color: white;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
     }
 .manager{
     padding-top: 100px;

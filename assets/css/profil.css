@@ -23,20 +23,19 @@ body {
     font-size: 14px;
     font-weight: normal;
     line-height: 1;
-    color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
 }
 .del{
-    font-size: 20px;
+    font-size: 1.5rem;
 }
 input{
     color: black;
 }
-
-
-form.login input[type="email"], form.login input[type="password"]
+form.login input[type="email"], form.login input[type="password"], form.login input[type="text"], form.delete input[type="text"], select[name="groupType"]
 {
     width: 100%;
-    padding: 5px 10px;
     background: 0;
     border: 0;
     border-bottom: 1px solid #1a1a1a;
@@ -45,9 +44,11 @@ form.login input[type="email"], form.login input[type="password"]
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;
-    margin-bottom: 5px;
     color: black;
     outline: 0;
+}
+.login input[type="text"]::placeholder{
+    color: #666666;
 }
 .login input[type="email"]::placeholder{
     color: #666666;
@@ -55,12 +56,17 @@ form.login input[type="email"], form.login input[type="password"]
 .login input[type="password"]::placeholder{
     color: #666666;
 }
+.delete input[type="text"]::placeholder{
+    color: #666666;
+}
 .login{
     margin-top: 30px;
 }
 input, label, select{
-    margin: 10px;
+    margin-top: 10px;
 }
-.danger{
+#helpBlock{
     color: #C9302C;
+    font-weight: bold;
+    padding-left: 5px;
 }

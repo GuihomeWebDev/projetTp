@@ -13,8 +13,7 @@ class users extends database {
      * Déclaration de la méthode magique construct.
      * Le constructeur de la classe est appelé avec le mot clé new.
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->connectDB();
     }
@@ -22,8 +21,7 @@ class users extends database {
     /**
      * Fonction permettant l'ajout d'un utilisateur
      */
-    public function addUser()
-    {
+    public function addUser() {
         $isOk = FALSE;
         $insert = 'INSERT INTO `JLpeLJpmTp_users` (`login`,`password`,`mail`,`id_group`) VALUES(:login, :password, :mail, :id_group)';
         $queryPrepare = $this->pdo->prepare($insert);
@@ -31,7 +29,7 @@ class users extends database {
         $queryPrepare->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $queryPrepare->bindValue(':id_group', $this->id_group, PDO::PARAM_INT);
-        if($queryPrepare->execute()){
+        if ($queryPrepare->execute()) {
             $this->id = $this->pdo->lastInsertId();
             $isOk = TRUE;
         }
@@ -41,20 +39,17 @@ class users extends database {
     /**
      * Fonction permettant de récupérer le hash en fonction du password
      */
-    public function getHashByUser()
-    {
+    public function getHashByUser() {
         $isOk = FALSE;
         $select = 'SELECT `password`,`id` FROM `JLpeLJpmTp_users` WHERE `login` = :login';
         $queryPrepare = $this->pdo->prepare($select);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
         //Si la requête s'éxecute sans erreur
-        if ($queryPrepare->execute())
-        {
+        if ($queryPrepare->execute()) {
             //On récupère le hash
             $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
             //Si resulte est un objet (donc si on a récupéré et stocké notre résultat dans result)
-            if (is_object($result))
-            {
+            if (is_object($result)) {
                 //On donne à l'attribut de notre objet créé dans le controller la valeur de l'attribut password de notre objet resultat
                 $this->password = $result->password;
                 $this->id = $result->id;
@@ -74,8 +69,7 @@ class users extends database {
      * 1 -> un utilisateur avec ce nom existe, on ne crée pas le nouvel utilisateur
      * @return INT
      */
-    public function checkUser()
-    {
+    public function checkUser() {
         $select = 'SELECT COUNT(*) AS `exists` FROM `JLpeLJpmTp_users` WHERE `login` = :login';
         $queryPrepare = $this->pdo->prepare($select);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
@@ -84,11 +78,36 @@ class users extends database {
         return $result->exists;
     }
 
-    public function deleteMember()
-    {
+    public function deleteMember() {
         $delete = 'DELETE FROM `JLpeLJpmTp_users` WHERE `mail` = :mail AND `id` = :id';
         $queryPrepare = $this->pdo->prepare($delete);
         $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryPrepare->execute();
+    }
+
+    public function getUserById() {
+        $isOk = false;
+        $display = 'SELECT `password`,`id`,`mail`,`login` FROM `JLpeLJpmTp_users` WHERE `id` = :id';
+        $queryPrepare = $this->pdo->prepare($display);
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($queryPrepare->execute()) {
+            $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
+            $this->id = $result->id;
+            $this->mail = $result->mail;
+            $this->login = $result->login;
+            $this->password = $result->password;
+            $isOk = true;
+        }
+        return $isOk;
+    }
+
+    public function editProfil() {
+        $update = 'UPDATE `JLpeLJpmTp_users` SET `login`= :login,`mail`= :mail,`password`= :password WHERE `id`= :id';
+        $queryPrepare = $this->pdo->prepare($update);
+        $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryPrepare->execute();
     }

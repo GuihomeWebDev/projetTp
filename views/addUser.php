@@ -7,20 +7,14 @@ include_once 'models/group.php';
 include_once 'controllers/addUserCtrl.php';
 ?>
 
-<?php
-//En cas d'erreur, on affiche un message
-if ($userError) {
-    ?>
-    <p>Erreur</p>
-    <?php
-}
-?>
+
 <html>
     <head>
         <title>title</title>
         <link href="../assets/css/addUsers.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>    
+        <h1>Création de compte</h1>
         <form action="?page=addUser" method="POST">
             <label for="login">Nom d'utilisateur :</label>
             <input type="text" name="login" id="login"/>
@@ -41,5 +35,13 @@ if ($userError) {
             <input type="text" name="groupName" id="groupName" value="<?=$group->name?>"/>
             <input type="submit" name="save" id="input"value="Enregistrer"/>
         </form>
+        <?php
+//En cas d'erreur, on affiche un message
+if ($userError) {
+    ?>
+    <p>Erreur</p>
+    <?php
+}
+?>
     </body>
 </html>
