@@ -8,7 +8,7 @@ include_once 'models/users.php';
 <div class="container text-center formDelete">
     <div class="row">
         <div class="col-md-12">
-            <h1>Bienvenue <?= $_SESSION["isConnected"] ?></h1>
+            <h2>Bienvenue <?= $_SESSION["isConnected"] ?></h2>
         </div>
     </div>
 </div>
@@ -20,11 +20,6 @@ include_once 'models/users.php';
                 <input type="email" class="form-control" id="mail" name="mail" value="<?= $user->mail ?>">
             </div>
         </div> 
-        <div class="form-group">
-            <div class="col-md-5">
-                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier mail"/>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-5">
                 <label for="oldPassword">Ancien mot de passe</label>
@@ -43,11 +38,6 @@ include_once 'models/users.php';
                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Mot de passe">
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-5">
-                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier mot de passe"/>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-5">
                 <label for="InputLogin">Modifier votre login</label>
@@ -56,7 +46,7 @@ include_once 'models/users.php';
         </div>  
         <div class="form-group">
             <div class="col-md-5">
-                <input type="submit" id="modifyProfil" name="modifyProfil" value="Modifier login"/>
+                <input type="submit" class="btn btn-warning"id="modifyProfil" name="modifyProfil" value="Enregistrer les modifications"/>
             </div>
         </div>
     </form>
@@ -66,7 +56,7 @@ include_once 'models/users.php';
         <form action="/?page=profil" method="POST" class="delete">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
-                    <label class="label del" for="delete">Pour supprimer votre compte :</label>
+                    <label class="label del " for="delete">Pour supprimer votre compte :</label>
                 </div>
                 <div class="col-md-3">
                     <input type="text" name="mail" placeholder="Entrez votre email" id="delete" aria-describedby="helpBlock"/>

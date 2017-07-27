@@ -22,6 +22,17 @@ class events extends database {
         parent::__construct();
         $this->connectDB();
     }
+    /**
+     * déclaration de la méthode removeEvents qui permet de supprimer une ligne dans la table
+     * 
+     */
+    public function removeEvents() {
+        $delete = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUsers` = :idUsers';
+        $queryPrepare = $this->pdo->prepare($delete);
+        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
+        return $queryPrepare->execute();
+    }
 
     /**
      * déclaration de la methode addEvents qui permet de créer un evenement dans la table events
@@ -53,7 +64,7 @@ class events extends database {
         $update = 'UPDATE `JLpeLJpmTp_events` SET `name`=:name,`startDate`=STR_TO_DATE(:startDate,\'%d-%m-%Y\'),`startTime`=:startTime,`endDate`=STR_TO_DATE(:endDate,\'%d-%m-%Y\'),`description`=:description,`location`=:location,`contribution`=:contribution WHERE `id`=:id AND `idUsers` = :idUsers';
         $queryPrepare = $this->pdo->prepare($update);
         $queryPrepare->bindValue(':name', $this->name, PDO::PARAM_STR);
-        $queryPrepare->bindValue(':startDate', $this->endDate, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':startDate', $this->startDate, PDO::PARAM_STR);
         $queryPrepare->bindValue(':startTime', $this->startTime, PDO::PARAM_STR);
         $queryPrepare->bindValue(':endDate', $this->endDate, PDO::PARAM_STR);
         $queryPrepare->bindValue(':description', $this->description, PDO::PARAM_STR);
@@ -62,19 +73,7 @@ class events extends database {
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         return $queryPrepare->execute();
-    }
-
-    /**
-     * déclaration de la méthode removeEvents qui permet de supprimer une ligne dans la table
-     * 
-     */
-    public function removeEvents() {
-        $delete = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUser` = :idUser';
-        $queryPrepare = $this->pdo->prepare($delete);
-        $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $queryPrepare->bindValue(':idUser', $this->idUser, PDO::PARAM_INT);
-        return $queryPrepare->execute();
-    }
+    }   
 
     /**
      * déclaration de la méthode getEvents qui permet d'afficher les lignes de la table

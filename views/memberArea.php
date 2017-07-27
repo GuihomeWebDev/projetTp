@@ -83,7 +83,7 @@ include_once 'models/events.php';
                         </div>
                         <div class="form-group">
                             <div class="col-md-5">
-                                <input type="submit" id="btnRegister" name="create" value="Enregistrer"/>
+                                <input class="btn btn-warning"type="submit" id="btnRegister" name="create" value="Enregistrer"/>
                             </div>
                         </div>
                     </form>
@@ -174,7 +174,7 @@ include_once 'models/events.php';
                             </div>
                             <div class="form-group">
                                 <div class="col-md-5">
-                                    <input type="submit" id="update" name="update" />
+                                    <input class="btn btn-success" type="submit" id="update" name="update" />
                                 </div>
                             </div>
                         </form>
@@ -197,7 +197,7 @@ include_once 'models/events.php';
                             <label class="label" for="name" > selectionner un évènement :</label>
                         </div>
                         <div class="col-md-5">                                
-                            <select name="events" class="col-md-5" id="events">                                   
+                            <select name="erase" class="col-md-5" id="eraseEvent">                                   
                                 <?php
                                 foreach ($eventsList as $item) {
                                     //Dans l'option on vérifie grâce à un ternaire que la valeur passée en POST($users->id_tppdo1_departments) est égale à l'option.
@@ -214,7 +214,7 @@ include_once 'models/events.php';
                     <?php } ?>
                 </div>
                 <div class="col-md-5">
-                    <input type="submit" id="erase" name="erase" />
+                    <a  id="eraseBtn" class="btn btn-danger" href="?page=memberArea&event=<?= $firstEventId ?>">Supprimer</a>                    
                 </div>        
             </div>
         </div> 
@@ -226,6 +226,7 @@ include_once 'models/events.php';
 <script src="../assets/js/jquery.ui.datepicker-fr.js" type="text/javascript"></script>
 <script src="../assets/js/tabs.js" type="text/javascript"></script>  
 <script src="../assets/js/ajax.js" type="text/javascript"></script>
+<script src="../assets/js/deleteEvent.js" type="text/javascript"></script>
 <script>
                 $(function () {
                     $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker($.datepicker.regional[ "fr" ]);

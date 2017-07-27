@@ -91,6 +91,7 @@ class users extends database {
         $display = 'SELECT `password`,`id`,`mail`,`login` FROM `JLpeLJpmTp_users` WHERE `id` = :id';
         $queryPrepare = $this->pdo->prepare($display);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
+        //hydratation de l'objet 
         if ($queryPrepare->execute()) {
             $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
             $this->id = $result->id;

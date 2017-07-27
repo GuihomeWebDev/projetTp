@@ -70,3 +70,10 @@ input, label, select{
     font-weight: bold;
     padding-left: 5px;
 }
+.del{
+    color: black;
+}
+.delete{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}

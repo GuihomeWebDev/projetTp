@@ -24,10 +24,9 @@ if (isset($_POST['eventUpdate'])) {
     $event = new events();
     $event->idUsers = $_SESSION['idUser'];
 //verifis que l utilisateur à appuyé sur le bouton supprimer et que les données attendues soient bien numérique
-    if (isset($_GET['deleteId']) && isset($_GET['userId']) && is_numeric($_GET['deleteId']) && is_numeric($_GET['userId'])) {
-        //recupere dans les proprietés id et idUser les informations passées en GET
-        $event->idUser = $_GET['userId'];
-        $event->id = $_GET['deleteId'];
+    if (isset($_GET['event'])&& is_numeric($_GET['event'])) {
+        //recupere dans les proprietés id et idUser les informations passées en GET       
+        $event->id = $_GET['event'];
         if (!$event->removeEvents()) {
             $errorMessage = 'La suppression a échouée';
         }
@@ -36,10 +35,14 @@ if (isset($_POST['eventUpdate'])) {
     $hasEvents = TRUE;
 //stockage de la fonction getEvents dans la variable $eventsList
     $eventsList = $event->getEventsByUserId();
+    $firstEventId = 0;
 //si $eventsList n est pas egale a TRUE
     if (!$eventsList) {
         //alors $eventsList = FALSE (voir memberArea.php)
         $hasEvents = FALSE;
+    } else {
+        $firstEventId = $eventsList[0];
+        $firstEventId = $firstEventId->id;
     }
 //vérification du format de la date de debut
     if (!empty($_POST['startDate'])) {
@@ -59,6 +62,7 @@ if (isset($_POST['eventUpdate'])) {
             $event->endDate = $endDate;
         }
     }
+    
 //ajouts d'évènements dans la BDD
     if (isset($_POST['create'])) {
         if (!empty($_POST['name'])) {
@@ -110,15 +114,7 @@ if (isset($_POST['eventUpdate'])) {
         if (!empty($_POST['events'])) {
             $event->id = strip_tags($_POST['events']);
         }
-        $event->editEvents();
-        //
+        $event->editEvents();        
     }
-        if (isset($_GET['erase']) && isset($_GET['userId']) && is_numeric($_GET['deleteId']) && is_numeric($_GET['userId'])) {
-        //recupere dans les proprietés id et idUser les informations passées en GET
-        $event->idUser = $_GET['userId'];
-        $event->id = $_GET['deleteId'];
-        if (!$event->removeEvents()) {
-            $errorMessage = 'La suppression a échouée';
-        }
-    }    
+    
 }
