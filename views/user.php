@@ -19,7 +19,7 @@ include_once 'controllers/userCtrl.php';
         <input type="password" name="password" id="password"/>
     </p>
     <p>
-        <input type="submit" name="connection" value="Connexion"/>
+        <input class="btn btn-success"type="submit" name="connection" value="Connexion"/>
     </p>
 </form>
 <script src="../assets/js/ajax.js" type="text/javascript"></script>

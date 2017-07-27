@@ -33,7 +33,7 @@ include_once 'controllers/addUserCtrl.php';
             </select>
             <label for="groupName">indiquer le nom de votre groupe :</label>
             <input type="text" name="groupName" id="groupName" value="<?=$group->name?>"/>
-            <input type="submit" name="save" id="input"value="Enregistrer"/>
+            <input class="btn btn-success"type="submit" name="save" id="input"value="Valider inscription"/>
         </form>
         <?php
 //En cas d'erreur, on affiche un message

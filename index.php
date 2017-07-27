@@ -45,8 +45,8 @@ include_once 'controllers/indexCtrl.php';
                             <li><a  href="?page=neophite">neophite</a></li>
                             <li><a  href="?page=addUser">inscription</a></li>
                             <li><a  href="?page=user">connexion</a></li>
-                        </ul>
-                    <?php } ?>
+                        <?php } ?>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -80,7 +80,7 @@ include_once 'controllers/indexCtrl.php';
                 if (!strcmp($_GET['page'], 'biker')) {
                     include_once 'views/biker.php';
                 }
-                 if (!strcmp($_GET['page'], 'profil')) {
+                if (!strcmp($_GET['page'], 'profil')) {
                     include_once 'views/profil.php';
                 }
             }

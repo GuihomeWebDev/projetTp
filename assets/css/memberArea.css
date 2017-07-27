@@ -100,4 +100,5 @@ select{
 }
 textarea{
     color: black;
+    resize: none;
 }

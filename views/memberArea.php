@@ -234,5 +234,6 @@ include_once 'models/events.php';
                         $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker("option",
                                 $.datepicker.regional[ $(this).val() ]);
                     });
+                    $( "#endDate, #startDate, #endDateModify, #startDateModify" ).datepicker();
                 });
 </script>
