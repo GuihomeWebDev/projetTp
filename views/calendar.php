@@ -78,7 +78,6 @@ include_once 'models/events.php';
 <div class="clear"></div>
 <script src="../assets/library/jquery-3.1.1.min.js" type="text/javascript"></script>
 <script src="../assets/library/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
-<script src="../assets/js/ajax.js" type="text/javascript"></script>
 <script>
     $(function () {
         $('.month').hide();
@@ -111,7 +110,7 @@ include_once 'models/events.php';
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>

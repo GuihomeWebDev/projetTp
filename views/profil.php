@@ -13,7 +13,7 @@ include_once 'models/users.php';
     </div>
 </div>
 <div class="container">
-    <form action="/?page=profil" method="POST" class="login row">
+    <form action="profile.html" method="POST" class="login row">
         <div class="row">
             <div class="col-md-5">
                 <label for="InputEmail1">Modifier votre email</label>
@@ -22,7 +22,7 @@ include_once 'models/users.php';
         </div> 
         <div class="row">
             <div class="col-md-5">
-                <label for="oldPassword">Ancien mot de passe</label>
+                <label for="oldPassword">Mot de passe actuel</label>
                 <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Mot de passe">
             </div>            
         </div>
@@ -46,26 +46,31 @@ include_once 'models/users.php';
         </div>  
         <div class="form-group">
             <div class="col-md-5">
-                <input type="submit" class="btn btn-warning"id="modifyProfil" name="modifyProfil" value="Enregistrer les modifications"/>
+                <span id="helpBlock" class="help-block text-warning">Saisisser votre mot de passe actuel pour valider les modifications</span>
+                <input type="submit" class="btn btn-warning"id="modifyProfil" name="modifyProfil" value="Enregistrer les modifications"/>                
             </div>
         </div>
     </form>
 </div>
 <div class="container">
     <div class="row">
-        <form action="/?page=profil" method="POST" class="delete">
+        <form action="profile.html" method="POST" class="delete">
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-3">
                     <label class="label del " for="delete">Pour supprimer votre compte :</label>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
                     <input type="text" name="mail" placeholder="Entrez votre email" id="delete" aria-describedby="helpBlock"/>
                 </div>
                 <div class="col-md-3">
                     <input type="submit" id="btnDelete" class="btn btn-danger" name="deleteMember" value="Supprimer votre compte"/>
-                    <span id="helpBlock" class="help-block text-danger">ATTENTION</span>
+                    <span id="helpBlock" class="help-block text-danger">ATTENTION action irréversible!!</span>
                 </div>
             </div>
         </form>
     </div>
 </div>
+</body>
+</html>

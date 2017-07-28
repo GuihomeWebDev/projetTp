@@ -35,7 +35,7 @@ else
         {
             $_SESSION["isConnected"] = $user->login;
             $_SESSION['idUser'] = $user->id;
-            header("Location: http://projetTP/index.php/?page=memberArea");
+            header("Location: http://projetTP/espaceMembre.html");
         }
     }
     

@@ -24,7 +24,7 @@ include_once 'models/events.php';
             <h2>Créer un évènement </h2>
             <div class="row">
                 <div class="col-md-12">
-                    <form action="/?page=memberArea" method="POST" class="form-horizontal">
+                    <form action="?page=memberArea" method="POST" class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label class="label" for="name" > Intitulé :</label>
@@ -38,7 +38,7 @@ include_once 'models/events.php';
                                 <label class="label" for="startDate" > Date de début :</label>
                             </div>
                             <div class="col-md-5">
-                                <input class="form-control" type="text" id="startDate" name="startDate"type="text" value="<?= $event->startDate ?>">
+                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="startDate" name="startDate"type="text" value="<?= $event->startDate ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,7 +54,7 @@ include_once 'models/events.php';
                                 <label class="label" for="endDate" >date de fin :</label>
                             </div>
                             <div class="col-md-5">      
-                                <input class="form-control" type="text" id="endDate" name="endDate" type="text" value="<?= $event->endDate ?>">
+                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="endDate" name="endDate" type="text" value="<?= $event->endDate ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,7 +97,7 @@ include_once 'models/events.php';
                     <?php
                     if ($hasEvents) {
                         ?>
-                        <form action="/?page=memberArea" method="POST" class="form-horizontal">
+                        <form action="?page=memberArea" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label class="label" for="name" > selectionner un évènement :</label>
@@ -129,7 +129,7 @@ include_once 'models/events.php';
                                     <label class="label" for="startDate" > Date de début :</label>
                                 </div>
                                 <div class="col-md-5">
-                                    <input class="form-control" type="text" id="startDateModify" name="startDate" >
+                                    <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="startDateModify" name="startDate" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -145,7 +145,7 @@ include_once 'models/events.php';
                                     <label class="label" for="endDate" >date de fin :</label>
                                 </div>
                                 <div class="col-md-5">      
-                                    <input class="form-control" type="text" id="endDateModify" name="endDate">
+                                    <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="endDateModify" name="endDate">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -214,26 +214,12 @@ include_once 'models/events.php';
                     <?php } ?>
                 </div>
                 <div class="col-md-5">
-                    <a  id="eraseBtn" class="btn btn-danger" href="?page=memberArea&event=<?= $firstEventId ?>">Supprimer</a>                    
+                    <a  id="eraseBtn" class="btn btn-danger" href="/index.php?page=memberArea&event=<?= $firstEventId ?>">Supprimer</a>                    
                 </div>        
             </div>
         </div> 
     </div>
-</div>
-<link href="../assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../assets/js/jquery.ui.datepicker-fr.js" type="text/javascript"></script>
-<script src="../assets/js/tabs.js" type="text/javascript"></script>  
-<script src="../assets/js/ajax.js" type="text/javascript"></script>
-<script src="../assets/js/deleteEvent.js" type="text/javascript"></script>
-<script>
-                $(function () {
-                    $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker($.datepicker.regional[ "fr" ]);
-                    $("#locale").on("change", function () {
-                        $("#endDate, #startDate, #endDateModify, #startDateModify").datepicker("option",
-                                $.datepicker.regional[ $(this).val() ]);
-                    });
-                    $( "#endDate, #startDate, #endDateModify, #startDateModify" ).datepicker();
-                });
-</script>
+    <script src="assets/library/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="../assets/js/tabs.js" type="text/javascript"></script>
+    <script src="../assets/js/deleteEvent.js" type="text/javascript"></script>
+   

@@ -24,32 +24,37 @@ if (isset($_POST['deleteMember'])) {//on verifi que le champ mail n'est pas vide
 $user->getUserById();
 
 if (isset($_POST['modifyProfil'])) {
+    $errorList = array();
+    if (!empty($_POST['mail'])) {
+        $user->mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
+        if(filter_var($user->mail, FILTER_VALIDATE_EMAIL) == FALSE){
+            $errorList['mail'] = 'Ceci n\'est pas une email valide';
+        }
+    }
+    if (!empty($_POST['login'])) {
+        $user->login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
+    }
     if (!empty($_POST['oldPassword'])) {
         if (password_verify($_POST['oldPassword'], $user->password)) {
             if (!empty($_POST['newPassword'])) {
                 if (!empty($_POST['confirmPassword'])) {
                     if (strcmp($_POST['newPassword'], $_POST['confirmPassword']) === 0) {
                         $user->password = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
-                        if ($user->editProfil()) {
-                            $message = 'Mofification du mot de passe est validée';
-                        } else {
-                            $message = 'modification du mot de passe à échouée';
-                        }
                     }
                 }
             }
+        } else {
+            $errorList['pwd'] = 'mot de passe incorrect';
         }
+    } else {
+        $errorList['pwd'] = 'mot de passe obligatoire';
     }
-}
-
-if (isset($_POST['modifyProfil'])) {
-    if (!empty($_POST['mail'])) {
-        $user->mail = strip_tags($_POST['mail']);
-    }
-    if (!empty($_POST['login'])) {
-        $user->login = strip_tags($_POST['login']);
-    }
-    if ($user->editProfil()) {
-        $_SESSION['isConnected'] = $user->login;
+    if (count($errorList) == 0) {
+        if ($user->editProfil()) {
+            $_SESSION['isConnected'] = $user->login;
+            $message = 'Mofification effectuée';
+        } else {
+            $message = 'La modification a échouée';
+        }
     }
 }

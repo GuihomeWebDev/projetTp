@@ -63,7 +63,7 @@ if (isset($_POST['save'])) {
         if ($user->addUser()) {
             $_SESSION["isConnected"] = $user->login;
             $_SESSION['idUser'] = $user->id;
-            header("Location: http://projetTP/?page=memberArea");
+            header("Location: http://projetTP/espaceMembre.html");
             exit;
         }
     }

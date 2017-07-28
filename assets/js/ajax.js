@@ -42,12 +42,13 @@ $(function () {
                 function (data) {
                     //dans data c'est le json généré dans le controlleur grâce à la méthode json_encode
                     events = data.events;
+                    console.log(events);
                     //équivalent à un foreach PHP. on réalise un "foreach" sur events et on exécute la fonction anonyme
                     //qui permet d'ajouter(append) tout ce qui va bien.
                     jQuery.each(events, function () {
                         //on rempli la modal avec le json
                         $('.modal-body').append('<ul class="list-unstyled modalEvent delete"><li>' + 'Auteur du post :<br><span class="nameEvent"> ' + this.login + '</span></li><br><li>' + 'Membre du :<br><span class="nameEvent"> ' + this.groupTypeName + ' : ' + this.groupName + '</span></li><br><li>' + 'Nom de l\'événement :<br><span class="nameEvent"> ' + this.eventName + '</span></li><br><li>' + 'Date de début : <br><span class="nameEvent">' + this.startDate + '</span></li><br><li>' + 'heure de début : <br><span class="nameEvent">' + this.startTime + '</span></li><br><li>' + 'date de fin : <br><span class="nameEvent">' + this.endDate + '</span></li><br><li>' + 'Description des festivités : <br><span class="nameEvent">' + this.description + '</span></li><br><li>' + 'Adresse : <br><span class="nameEvent"> ' + this.location + '</span></li><br><li>' + 'Coût d\'entrée en euros : <br><span class="nameEvent">' + this.contribution + '</span></li><br></ul>');
-                    })
+                    });
                 },
                 'JSON');
 //on afiche la modal

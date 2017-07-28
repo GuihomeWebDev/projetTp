@@ -7,7 +7,7 @@ include_once 'controllers/userCtrl.php';
 ?>
 <link href="../assets/css/user.css" rel="stylesheet" type="text/css"/>
 <h1>Espace connection</h1>
-<form action="/?page=user" method="POST">
+<form action="connexion.html" method="POST">
     <p>
         <label for="login">Nom d'utilisateur :</label>
         <input type="text" name="login" id="login"/>

@@ -12,8 +12,9 @@ include_once 'controllers/indexCtrl.php';
         <meta charset="UTF-8">
         <title>Bikers events</title>
         <link href="/assets/library/bootstrap/css/bootstrap.css" rel="stylesheet"/>              
-        <link href="assets/library/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>        
-        <link href="assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>        
+        <link href="assets/library/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/library/datepicker/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/library/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="/assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -26,25 +27,25 @@ include_once 'controllers/indexCtrl.php';
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">Accueil</a>
+                    <a class="navbar-brand" href="/">Accueil</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <?php
                         if (isset($_SESSION['isConnected'])) {
                             ?>
-                            <li><a href="?page=calendar">Calendrier évenements</a></li>                            
-                            <li><a href="?page=neophite">Neophite</a></li>
-                            <li><a href="/?page=memberArea">Gestion des évènements</a></li>                                                          
-                            <li><a href="/?page=profil">Modifier votre profil</a></li>                                                          
+                            <li><a href="calendrier.html">Calendrier évenements</a></li>                            
+                            <li><a href="neophite.html">Neophite</a></li>
+                            <li><a href="espaceMembre.html">Gestion des évènements</a></li>                                                          
+                            <li><a href="profile.html">Modifier votre profil</a></li>                                                          
                             <li><a href="/?action=logOut">Déconnexion</a></li>
                             <?php
                         } else {
                             ?>
-                            <li><a href="?page=calendar">calendrier évenements</a></li>
-                            <li><a  href="?page=neophite">neophite</a></li>
-                            <li><a  href="?page=addUser">inscription</a></li>
-                            <li><a  href="?page=user">connexion</a></li>
+                            <li><a href="calendrier.html">calendrier évenements</a></li>
+                            <li><a  href="neophite.html">neophite</a></li>
+                            <li><a  href="inscription.html">inscription</a></li>
+                            <li><a  href="connexion.html">connexion</a></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -74,12 +75,6 @@ include_once 'controllers/indexCtrl.php';
                 if (!strcmp($_GET['page'], 'memberArea')) {
                     include_once 'views/memberArea.php';
                 }
-                if (!strcmp($_GET['page'], 'neophite')) {
-                    include_once 'views/neophite.php';
-                }
-                if (!strcmp($_GET['page'], 'biker')) {
-                    include_once 'views/biker.php';
-                }
                 if (!strcmp($_GET['page'], 'profil')) {
                     include_once 'views/profil.php';
                 }
@@ -91,9 +86,22 @@ include_once 'controllers/indexCtrl.php';
             ?>
         </div>
         <script src="assets/library/jquery-3.1.1.min.js" type="text/javascript"></script>
-        <script src="assets/library/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/ajax.js" type="text/javascript"></script>
         <script src="assets/library/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>         
+        <script src="assets/library/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/library/datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="assets/library/datepicker/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                //On le met à la fin pour accélérer le chargement de la page.
+                //Configuration du plugin
+                $('.datepicker').datepicker({
+                    language: 'fr',
+                    autoclose: true
+                });
 
+            });
+        </script>
     </body>
 </html>
 

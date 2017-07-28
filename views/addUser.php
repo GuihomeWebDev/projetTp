@@ -8,14 +8,12 @@ include_once 'controllers/addUserCtrl.php';
 ?>
 
 
-<html>
-    <head>
-        <title>title</title>
+
         <link href="../assets/css/addUsers.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>    
         <h1>Création de compte</h1>
-        <form action="?page=addUser" method="POST">
+        <form action="inscription.html" method="POST">
             <label for="login">Nom d'utilisateur :</label>
             <input type="text" name="login" id="login"/>
             <label for="mail">Mail :</label>

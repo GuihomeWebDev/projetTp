@@ -6,7 +6,7 @@
         <div class="row">
             <figure>
                 <div class="col-md-4 thumbnailHome">
-                    <a href="?page=neophite">
+                    <a href="neophite.html">
                         <img src="assets/pictures/decouvrir.jpeg" alt=""/>
                     </a>
                     <figcaption>Un Peu de Culture</figcaption>
@@ -18,7 +18,7 @@
                     <figcaption>Découvrez la Hells week</figcaption>
                 </div>
                 <div class="col-md-4">
-                    <a href="?page=calendar">
+                    <a href="calendrier.html">
                         <img src="assets/pictures/calendar.png" alt=""/>
                     </a>
                     <figcaption>Calendrier</figcaption>
