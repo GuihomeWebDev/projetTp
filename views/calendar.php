@@ -3,7 +3,6 @@ include_once 'configuration.php';
 include_once 'controllers/calendarCtrl.php';
 include_once 'models/events.php';
 ?>
-<link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
 <h1>Calendrier des évènements</h1>
 <div class="container">
     <div class="row">
@@ -115,5 +114,3 @@ include_once 'models/events.php';
         </div>
     </div>
 </div>
-</body>
-</html>

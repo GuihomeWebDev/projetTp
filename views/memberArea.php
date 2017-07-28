@@ -3,7 +3,6 @@ include_once 'configuration.php';
 include_once 'controllers/memberAreaCtrl.php';
 include_once 'models/events.php';
 ?>
-<link href="../assets/css/memberArea.css" rel="stylesheet" type="text/css"/>
 <h1>Gestion des évènements</h1>
 <div class="container text-center formDelete">
     <div class="row">

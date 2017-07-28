@@ -1,3 +1,6 @@
+
+/*DEBUT DU STYLE DE LA VUE CALENDARD.PHP*/
+
 body {
     background: url(../pictures/calendrier.jpeg) no-repeat fixed;
     background-size: cover !important;
@@ -162,3 +165,4 @@ table td:hover .daytitle{
 .modal-body{
     text-align: center;
 }
+/*FIN DU STYLE DE LA VUE CALENDARD.PHP*/

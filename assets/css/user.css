@@ -1,6 +1,6 @@
 
-
-body {
+/*DEBUT DU STYLE DE LA VUE user.PHP*/
+body{
     background: url(../pictures/connection.jpeg) no-repeat fixed;
     background-size: cover !important;
     width: 100%;
@@ -24,4 +24,6 @@ label{
     color:green;
 }
 /*Fin css ajax login*/
+/*FIN DU STYLE DE LA VUE user.PHP*/
+
 

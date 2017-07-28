@@ -1,4 +1,3 @@
-<link href="../assets/css/hellsWeek.css" rel="stylesheet" type="text/css"/>
 <h1>La hell's week</h1>
 <div id="body">
     <div>
@@ -17,5 +16,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+

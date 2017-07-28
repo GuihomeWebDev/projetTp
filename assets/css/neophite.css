@@ -1,3 +1,4 @@
+/*DEBUT DU STYLE DE LA VUE neophite.PHP*/
 body {
     background: url(../pictures/gallery.jpg) no-repeat fixed;
     background-size: cover !important;
@@ -21,3 +22,4 @@ p{
 .spaceText{
     margin-top: 80px; 
 }
+/*FIN DU STYLE DE LA VUE neophite.PHP*/

@@ -1,5 +1,4 @@
 <link href="https://fonts.googleapis.com/css?family=Itim|Rock+Salt" rel="stylesheet"> 
-<link href="../assets/css/neophite.css" rel="stylesheet" type="text/css"/>
 <h1>Culture du monde biker</h1>
 <div class="container">
     <div class="row spaceText">
@@ -33,5 +32,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+

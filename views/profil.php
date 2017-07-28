@@ -3,7 +3,6 @@ include_once 'configuration.php';
 include_once 'controllers/profilCtrl.php';
 include_once 'models/users.php';
 ?>
-<link href="../assets/css/profil.css" rel="stylesheet" type="text/css"/>
 <h1>Espace personnel</h1>
 <div class="container text-center formDelete">
     <div class="row">
@@ -72,5 +71,3 @@ include_once 'models/users.php';
         </form>
     </div>
 </div>
-</body>
-</html>
