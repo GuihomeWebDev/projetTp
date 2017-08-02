@@ -46,7 +46,7 @@ include_once 'models/users.php';
         <div class="form-group">
             <div class="col-md-5">
                 <span id="helpBlock" class="help-block text-warning">Saisisser votre mot de passe actuel pour valider les modifications</span>
-                <input type="submit" class="btn btn-warning"id="modifyProfil" name="modifyProfil" value="Enregistrer les modifications"/>                
+                <input type="submit" class="btn btn-warning" id="modifyProfil" name="modifyProfil" value="Enregistrer les modifications"/>                
             </div>
         </div>
     </form>

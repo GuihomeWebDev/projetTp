@@ -22,4 +22,8 @@ p{
 .spaceText{
     margin-top: 80px; 
 }
+h1{
+    color: white;  
+    text-align: center;
+}
 /*FIN DU STYLE DE LA VUE neophite.PHP*/

@@ -12,7 +12,7 @@ include_once 'controllers/userCtrl.php';
         <label for="login">Nom d'utilisateur :</label>
         <input type="text" name="login" id="login"/>
         <span id="success">C'est ok</span>
-        <span id="error">C'est pas ok</span>
+        <span id="error">identifiant ou mot de passe érroné</span>
     </p>
     <p>
         <label for="password">Mot de passe :</label>

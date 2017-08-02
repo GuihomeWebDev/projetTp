@@ -1,12 +1,19 @@
-<?php
+<?php 
+//si utilisation de l ajax...
 if(isset($_POST['timestamp'])){
+    //on inclut la config de connextion et le model
     include_once '../configuration.php';
     include_once '../class/database.php';
     include_once '../models/events.php';
+    //on instancie l'objet
     $date = new events();
+    // on tranforme le timestamp en date
     $date->startDate = date('Y-m-d', $_POST['timestamp']);
+    //on stock dans events l'execution de la methode getEventsByDate();
     $events = $date->getEventsByDate();
-    echo json_encode(array('events'=>$events,'groupName' => 'toto'));
+    //on affiche le json plcé dans un tableau
+    echo json_encode(array('events'=>$events,'groupName' => 'name'));
+    //execution sans ajax...
 } else {   
 function getAll($year) {
     $r = array();

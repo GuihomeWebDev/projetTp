@@ -305,4 +305,8 @@ p a:hover {
 #content{
     padding-top: 50px;
 }
-
+figcaption{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}

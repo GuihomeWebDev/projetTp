@@ -1,12 +1,9 @@
 <?php
-
 class group extends database {
-
 //déclaration des attributs de la class reprenant les champs de la table events
     public $id = 0;
     public $name = '';
     public $id_groupType = 0;
-
     /**
      * declaration de la methode magique contruct qui permet d instancier l objet events et egalement de se connecter à la base de donnée.
      */
@@ -14,7 +11,6 @@ class group extends database {
         parent::__construct();
         $this->connectDB();
     }
-
     public function addGroup() {
         //requete SQL qui permet d'ajouter une ligne dans la table nommé avec un préfix  JLpeLJpmTp_events 
         $insert = 'INSERT INTO `JLpeLJpmTp_group` (`name`, `id_groupType`) VALUES (:name,:id_groupType)';
@@ -28,6 +24,5 @@ class group extends database {
     }
     public function lastInsertId(){
         return $this->pdo->lastInsertId();
-    }
-    
+    }    
     }

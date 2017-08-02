@@ -4,6 +4,8 @@
 if (isset($_POST['verifLogin']))
 {
     //on inclut le modèle car on n'appelle pas la page index.php
+    include_once '../configuration.php';
+    include_once '../class/database.php';
     include_once '../models/users.php';
     //On instancie la classe user
     $user = new users();

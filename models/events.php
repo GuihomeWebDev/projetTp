@@ -6,9 +6,9 @@ class events extends database {
 //déclaration des attributs de la class reprenant les champs de la table events
     public $id = 0;
     public $name = '';
-    public $startDate = '01-01-2000';
+    public $startDate = '01-01-2017';
     public $startTime='';
-    public $endDate = '01-01-2000';
+    public $endDate = '01-01-2017';
     public $description = '';
     public $location = '';
     public $contribution = 0;
@@ -85,16 +85,16 @@ class events extends database {
         return $query!= FALSE ?  $query->fetchALL(PDO::FETCH_OBJ) : FALSE;
     }
     /**
-     * déclaration de la méthode getEventsByDate permet d'afficher la liste d'evenements par la date
+     * déclaration de la méthode getEventsByDate permet d'afficher grace à une jointure tous les champs 
+     * nécessaire au remplissage de la modal dans le calendrier 
      * 
      */
-    public function getEventsByDate() {
-        //jointure a faire ici !!!!!!
+    public function getEventsByDate() {        
         $display = 'SELECT `JLpeLJpmTp_events`.`name` AS `eventName`, DATE_FORMAT(`JLpeLJpmTp_events`.`startDate`, \'%d-%m-%Y\') AS `startDate`, `JLpeLJpmTp_events`.`startTime`, DATE_FORMAT(`JLpeLJpmTp_events`.`endDate`, \'%d-%m-%Y\') AS `endDate`, `JLpeLJpmTp_events`.`description`, `JLpeLJpmTp_events`.`location`, `JLpeLJpmTp_events`.`contribution`, `JLpeLJpmTp_events`.`idUsers`,`JLpeLJpmTp_users`.`login`, `JLpeLJpmTp_group`.`name` AS `groupName`, `JLpeLJpmTp_groupType`.`name` AS `groupTypeName` FROM `JLpeLJpmTp_events` INNER JOIN `JLpeLJpmTp_users` ON `JLpeLJpmTp_users`.`id` = `JLpeLJpmTp_events`.`idUsers` INNER JOIN `JLpeLJpmTp_group` ON `JLpeLJpmTp_group`.`id` = `JLpeLJpmTp_users`.`id_group` INNER JOIN `JLpeLJpmTp_groupType` ON `JLpeLJpmTp_groupType`.`id` = `JLpeLJpmTp_group`.`id_groupType` WHERE `startDate` = :startDate';
         $queryPrepare = $this->pdo->prepare($display);
         $queryPrepare->bindValue(':startDate', $this->startDate, PDO::PARAM_STR);
         $queryPrepare->execute();
-        return $queryPrepare != false ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : false;
+        return $queryPrepare != FALSE ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : FALSE;
     }
     /**
      * déclaration de la méthode getEventsByUserId permet d'afficher la liste d'evenements par id de l'utilisateur
@@ -105,7 +105,7 @@ class events extends database {
         $queryPrepare = $this->pdo->prepare($display);
         $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $queryPrepare->execute();
-        return $queryPrepare != false ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : false;
+        return $queryPrepare != FALSE ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : FALSE;
     }
     /**
      * déclaration de la méthode getEventsById permet d'afficher la liste d'evenements par id 
@@ -116,7 +116,7 @@ class events extends database {
         $queryPrepare = $this->pdo->prepare($display);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryPrepare->execute();
-        return $queryPrepare != false ? $queryPrepare->fetch(PDO::FETCH_OBJ) : false;
+        return $queryPrepare != FALSE ? $queryPrepare->fetch(PDO::FETCH_OBJ) : FALSE;
     }
     /**
      * déclaration de la méthode getInfo  permet d'afficher le nom de l utilisateur, 

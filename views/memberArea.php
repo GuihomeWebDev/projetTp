@@ -29,7 +29,7 @@ include_once 'models/events.php';
                                 <label class="label" for="name" > Intitulé :</label>
                             </div>
                             <div class="col-md-5">
-                                <input class="form-control" type="text" name="name" id="name" placeholder="Nom de l'évènement"value="<?= $event->name ?>">
+                                <input class="form-control" type="text" name="name" id="name" placeholder="Nom de l'évènement" value="<?= $event->name ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,7 +37,7 @@ include_once 'models/events.php';
                                 <label class="label" for="startDate" > Date de début :</label>
                             </div>
                             <div class="col-md-5">
-                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="startDate" name="startDate"type="text" value="<?= $event->startDate ?>">
+                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="startDate" name="startDate" type="text" value="<?= $event->startDate ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -45,7 +45,7 @@ include_once 'models/events.php';
                                 <label class="label" for="startTime"> Heure de début :</label>
                             </div>
                             <div class="col-md-5">
-                                <input class="form-control" type="text" name="startTime" id="startTime" data-mask="99:99:00" value="<?= $event->startTime ?>">
+                                <input class="form-control" type="text" name="startTime" id="startTime" data-mask="99:99" value="<?= $event->startTime ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,7 +53,7 @@ include_once 'models/events.php';
                                 <label class="label" for="endDate" >date de fin :</label>
                             </div>
                             <div class="col-md-5">      
-                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="endDate" name="endDate" type="text" value="<?= $event->endDate ?>">
+                                <input data-provide="datepicker" data-mask="99-99-9999" class="datepicker form-control" type="text" id="endDate" name="endDate" type="text" value="<?= $event->endDate ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -61,7 +61,7 @@ include_once 'models/events.php';
                                 <label class="label" for="description" >Description:</label>
                             </div>
                             <div class="col-md-5">
-                                <textarea class="form-control" type="text" name="description" id="description" placeholder="Description des féstivités" value="<?= $event->description ?>"></textarea>
+                                <textarea class="form-control" type="text" name="description" id="description" placeholder="Description des féstivités" value="<?= $event->description ?>" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,7 +69,7 @@ include_once 'models/events.php';
                                 <label class="label" for="location" >Ville ou se situe l'évènement:</label>
                             </div>
                             <div class="col-md-5">
-                                <input class="form-control" type="text" name="location" id="location" placeholder="Adresse" value="<?= $event->location ?>">
+                                <input class="form-control" type="text" name="location" id="location" placeholder="Adresse" value="<?= $event->location ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -77,12 +77,12 @@ include_once 'models/events.php';
                                 <label class="label" for="contribution" >coût de l'entrée :</label>
                             </div>
                             <div class="col-md-5">
-                                <input class="form-control" type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?= $event->contribution ?>">
+                                <input class="form-control" type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?= $event->contribution ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-5">
-                                <input class="btn btn-warning"type="submit" id="btnRegister" name="create" value="Enregistrer"/>
+                                <input class="btn btn-warning" type="submit" id="btnRegister" name="create" value="Enregistrer"/>
                             </div>
                         </div>
                     </form>
@@ -105,8 +105,7 @@ include_once 'models/events.php';
                                     <select name="events" id="events">
                                         <option></option>
                                         <?php
-                                        foreach ($eventsList as $item) {
-                                            //Dans l'option on vérifie grâce à un ternaire que la valeur passée en POST($users->id_tppdo1_departments) est égale à l'option.
+                                        foreach ($eventsList as $item) {                                            
                                             ?>     
                                             <option value="<?= $item->id ?>"><?= $item->name ?></option>
                                             <?php
@@ -198,8 +197,7 @@ include_once 'models/events.php';
                         <div class="col-md-5">                                
                             <select name="erase" class="col-md-5" id="eraseEvent">                                   
                                 <?php
-                                foreach ($eventsList as $item) {
-                                    //Dans l'option on vérifie grâce à un ternaire que la valeur passée en POST($users->id_tppdo1_departments) est égale à l'option.
+                                foreach ($eventsList as $item) {                                    
                                     ?>     
                                     <option value="<?= $item->id ?>"><?= $item->name ?></option>
                                     <?php

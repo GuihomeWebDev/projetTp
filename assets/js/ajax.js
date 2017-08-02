@@ -7,7 +7,7 @@ $(function () {
          * _Les actions à effectuer avec le retour du PHP
          * _Le format de donnée utilisé en retour de PHP
          **/
-        $.post('controllers/indexCtrl.php',
+        $.post('controllers/userCtrl.php',
                 {
                     verifLogin: $('#login').val() //le $_POST['verifLogin'] prend le contenu de l'input
                 },
@@ -15,7 +15,7 @@ $(function () {
                     //dans data c'est le json généré dans le controlleur grâce à la méthode json_encode
                     response = data.response;
                     //Si response est = à 1 c'est que le login existe déjà
-                    if (response == 1) {
+                    if (response == 0) {
                         //On affiche le message d'erreur et on cache le message de succès
                         $('#error').show();
                         $('#success').hide();
@@ -27,7 +27,7 @@ $(function () {
                 },
                 'JSON');
     });
-    //ce script 
+    // script ajax pour l'injection des données évènements dans la modale 
     // declenchement au click
     $('.days').click(function () {
         //la variable timestamp récupère la valeur de l'id de l'élément sur lequel l'utilisateur a appuyer.
@@ -51,10 +51,11 @@ $(function () {
                     });
                 },
                 'JSON');
-//on afiche la modal
+
+//script ajax pour le remplissage de mon formulaire modification évènement 
         $('#myModal').modal('show');
     });
-    // declenchement au click
+    // declenchement à la selection dans le 'select'
     $('#events').change(function (event) {
         event.preventDefault();
         $.post('../controllers/memberAreaCtrl.php',

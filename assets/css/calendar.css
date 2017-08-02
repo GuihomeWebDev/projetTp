@@ -165,4 +165,7 @@ table td:hover .daytitle{
 .modal-body{
     text-align: center;
 }
+h1{
+    color: white;    
+}
 /*FIN DU STYLE DE LA VUE CALENDARD.PHP*/
