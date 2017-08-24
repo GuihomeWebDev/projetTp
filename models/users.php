@@ -65,17 +65,20 @@ class users extends database {
     /**
      * Fonction permettant de compter le nombre de personnes ayant le login donné
      * Retourne le nombre de lignes trouvées
-     * 0 -> aucun utilisateur avec ce nom n'existe, on peut créer le nouvel utilisateur
-     * 1 -> un utilisateur avec ce nom existe, on ne crée pas le nouvel utilisateur
+     * 0 -> aucun utilisateur avec ce pseudonyme ou cette adresse email n'existe, on peut créer le nouvel utilisateur
+     * 1 -> un utilisateur avec ce pseudonyme existe, on ne crée pas le nouvel utilisateur
+     * 2 -> un utilisateur avec cette adresse email existe, on ne crée pas le nouvel utilisateur
+     * 3 -> un utilisateur avec ce pseudonyme et cette adresse email existe, on ne crée pas le nouvel utilisateur
      * @return INT
      */
     public function checkUser() {
-        $select = 'SELECT COUNT(*) AS `exists` FROM `JLpeLJpmTp_users` WHERE `login` = :login';
+        $select = 'SELECT SUM((CASE WHEN `login` = :login THEN 1 ELSE 0 END)+(CASE WHEN `mail` = :mail THEN 2 ELSE 0 END)) AS `exist` FROM `JLpeLJpmTp_users`';
         $queryPrepare = $this->pdo->prepare($select);
         $queryPrepare->bindValue(':login', $this->login, PDO::PARAM_STR);
+        $queryPrepare->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $queryPrepare->execute();
         $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
-        return $result->exists;
+        return $result->exist;
     }
 
     public function deleteMember() {
@@ -88,7 +91,7 @@ class users extends database {
 
     public function getUserById() {
         $isOk = false;
-        $display = 'SELECT `password`,`id`,`mail`,`login` FROM `JLpeLJpmTp_users` WHERE `id` = :id';
+        $display = 'SELECT `password`,`id`,`mail`,`login`, `id_group` FROM `JLpeLJpmTp_users` WHERE `id` = :id';
         $queryPrepare = $this->pdo->prepare($display);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         //hydratation de l'objet 
@@ -98,6 +101,7 @@ class users extends database {
             $this->mail = $result->mail;
             $this->login = $result->login;
             $this->password = $result->password;
+            $this->id_group = $result->id_group;
             $isOk = true;
         }
         return $isOk;
@@ -111,6 +115,14 @@ class users extends database {
         $queryPrepare->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryPrepare->execute();
+    }
+
+    public function memberNumber() {
+        $query = 'SELECT COUNT(`usr`.`id_group`) AS `number`, `group`.`name` FROM `JLpeLJpmTp_users` AS `usr` INNER JOIN `JLpeLJpmTp_group` AS `group` ON `usr`.`id_group` = `group`.`id` WHERE `usr`.`id_group`= :id_group';
+        $queryPrepare = $this->pdo->prepare($query);
+        $queryPrepare->bindValue(':id_group', $this->id_group, PDO::PARAM_INT);
+        $queryPrepare->execute();
+        return $queryPrepare->fetch(PDO::FETCH_OBJ);
     }
 
 }

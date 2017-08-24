@@ -10,6 +10,11 @@ include_once 'models/users.php';
             <h2>Bienvenue <?= $_SESSION["isConnected"] ?></h2>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <p>Vous êtes <?= $member->number ?> membres des <?= $member->name ?> inscrits</p>
+        </div>
+    </div>
 </div>
 <div class="container">
     <form action="profile.html" method="POST" class="login row">

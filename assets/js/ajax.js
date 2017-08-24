@@ -74,8 +74,29 @@ $(function () {
                     $('#contributionModify').val(selectedEvent.contribution);
                 },
                 'JSON');
-
-    })
+    });
+    //script ajax pour remplir le select groupName
+    $('#groupType').change(function(){
+        $.post('../controllers/addUserCtrl.php',
+                {
+                    selectedGroup: $('#groupType').val()
+                },
+                function (data) {
+                    //dans data c'est le json généré dans le controlleur grâce à la méthode json_encode
+                    selectedGroup = data.response;
+                    $('#groupName').empty();
+                    if(selectedGroup.length != 0){
+                        $('#inputCreateGroup').hide();
+                    }else{
+                        $('#inputCreateGroup').show();
+                    }
+                    jQuery.each(selectedGroup,function(){
+                        $('#groupName').append('<option value="' + this.id + '">' + this.name + '</option>');
+                    });
+                    $('#groupName').append('<option value="0">Nouveau</option>');
+                },
+                'JSON');
+    });
 });
 
 

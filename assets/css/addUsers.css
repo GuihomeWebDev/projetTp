@@ -12,9 +12,6 @@ body {
     font-weight: normal;
     line-height: 1;
 }
-#input{
-    color:black;
-}
 /*Début css ajax login*/
 #error,#success{
     display: none;
@@ -35,5 +32,13 @@ select{
 p{
     color: red;
     font-size: 20px;
+}
+.help-block{
+    color: red;
+    font-weight: bold;   
+    font-size: 20px;
+}
+#inputCreateGroup{
+    display: none;
 }
 /*FIN DU STYLE DE LA VUE addUsers.PHP*/

@@ -5,6 +5,11 @@ include_once 'class/database.php';
 include_once 'models/users.php';
 include_once 'models/events.php';
 include_once 'controllers/indexCtrl.php';
+if ((isset($_SESSION['isConnected']) && $_SESSION['isConnected'] && (!strcmp($page, 'addUser') || !strcmp($page, 'user'))) || !isset($_SESSION['isConnected']) && !strcmp($page, 'memberArea')) {
+    header('HTTP/1.1 403 Forbidden');
+    header("Location: ?error=403");
+    exit;
+}
 ?>
 <!doctype html>
 <html>
@@ -117,6 +122,7 @@ include_once 'controllers/indexCtrl.php';
         <script src="assets/library/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript"></script>
         <script src="assets/library/datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="assets/library/datepicker/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script src="assets/js/groupRegistration.js" type="text/javascript"></script>
         <script>
             $(function () {
                 //On le met à la fin pour accélérer le chargement de la page.

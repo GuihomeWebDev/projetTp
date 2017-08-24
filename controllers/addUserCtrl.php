@@ -1,71 +1,118 @@
 <?php
 
-//Déclaration de la variable $userError
-$userError = false;
-
+if (isset($_POST['selectedGroup'])) {
+    include_once '../configuration.php';
+    include_once '../class/database.php';
+    include_once '../models/group.php';
+    $group = new group();
+    $group->id_groupType = $_POST['selectedGroup'];
+    echo json_encode(array('response' => $group->getGroupList()));
+    //utilisation sans ajax dans le else
+} else {
 //Instanciation de l'objet user
-$user = new users();
-$group = new groupType();
-$groupName = new group();
-$select = $group->getGroupType();
-
-//On vérifie si l'on a bien appuyé sur le bouton Enregistrer
-if (isset($_POST['save'])) {
-    if (!empty($_POST['groupName'])) {
-        $groupName->id_groupType = $_POST['groupType'];
-        $groupName->name = strip_tags($_POST['groupName']);
-        $groupName->addGroup();
-        $user->id_group = $groupName->lastInsertId();
-    }
-    //Si la variable POST n'est pas vide
-    if (!empty($_POST['login'])) {
-        //On stocke sa valeur dans l'attribut login de l'objet user en sécurisant (strip_tags)
-        $user->login = strip_tags($_POST['login']);
-        //On vérifie avec la méthode checkUser que le login n'existe pas
-        //S'il existe, on passe $userError à true (nous permet d'afficher notre message d'erreur dans la vue)
-        if ($user->checkUser()) {
-            $userError = true;
+    $user = new users();
+    $errors = array();
+    $group = new groupType();
+    $groupName = new group();
+    $select = $group->getGroupType();
+    $emailHelper = '';
+    $passwordHelper = '';
+    $confirmPwdHelper = '';
+    $userExist = 0;
+    $message = '';
+    /*
+     * Pour enregistrer un nouvel utilisateur, on nettoie les champs puis
+     * on les stocks dans l'objet user.
+     * Si tout est correcte, on vérifie que le pseudonyme ainsi que l'email
+     * n'existent pas. Si c'est bien le cas, alors on ajoute l'utilisateur 
+     */
+    if (isset($_POST['save'])) {
+        if (!empty($_POST['groupType'])) {
+            $groupName->id_groupType = strip_tags($_POST['groupType']);
+            if (isset($_POST['groupName'])) {
+                if ($_POST['groupName'] != 0) {
+                    $user->id_group = strip_tags($_POST['groupName']);
+                } else {
+                    $idGroup = $groupName->checkifexist();
+                    if ($idGroup == 0) {
+                        if (!empty($_POST['createGroup'])) {
+                            $createGroup = strip_tags($_POST['createGroup']);
+                            $groupName->name = $createGroup;
+                            $groupName->addGroup();
+                            $user->id_group = $groupName->lastInsertId();
+                        } else {
+                            $errors['createGroup'] = 'Un nom de groupe doit être renseigné';
+                        }
+                    } else {
+                        $user->id_group = $idGroup;
+                    }
+                }
+            }
         }
-    } else {
-        //Si $_POST est vide, on passe $userError à true (nous permet d'afficher notre message d'erreur dans la vue)
-        $userError = true;
-    }
-    if (!empty($_POST['mail'])) {
-        //On stocke sa valeur dans l'attribut mail de l'objet user en sécurisant (strip_tags)
-        $user->mail = strip_tags($_POST['mail']);
-        $email = filter_var($user->mail, FILTER_VALIDATE_EMAIL);
-        if (!$email) {
-            $userError = true;
+        if (!empty($_POST['login'])) {
+            $user->login = strip_tags($_POST['login']);
+            $loginHelper = 'has-success';
         } else {
-            //On vérifie avec la méthode checkUser que le mail n'existe pas
-            //S'il existe, on passe $userError à true (nous permet d'afficher notre message d'erreur dans la vue)
-            if ($user->checkUser()) {
-                $userError = true;
+            $errors['login'] = 'Ce nom  existe déjà ';
+            $loginHelper = 'has-error';
+        }
+        if (!empty($_POST['mail'])) {
+            $mail = filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL);
+            if ($mail != FALSE) {
+                $user->mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL);
+                $mailHelper = 'has-success';
+            } else {
+                $user->mail = strip_tags($_POST['mail']);
+                $errors['mail'] = ' Format Email non valide ';
+                $mailHelper = 'has-error';
+            }
+        } else {
+            $errors['mail'] = 'mauvais format mail';
+            $mailHelper = 'has-error';
+        }
+        if (!empty($_POST['password'])) {
+            if (strlen($_POST['password']) >= 6) {
+                $passwordHelper = 'has-success';
+                if (!empty($_POST['confirmPwd'])) {
+                    if (strcmp($_POST['password'], $_POST['confirmPwd']) === 0) {
+                        $user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                        $confirmPwdHelper = 'has-success';
+                    } else {
+                        $errors['confirmPwd'] = 'Le mot de passe doit être identique';
+                        $confirmPwdHelper = 'has-error';
+                    }
+                } else {
+                    $errors['confirmPwd'] = 'Veuillez remplir ce champ';
+                    $confirmPwdHelper = 'has-error';
+                }
+            } else {
+
+                $errors['confirmPwd'] = 'Mot de passe trop court';
+                $passwordHelper = 'has-error';
+            }
+        } else {
+            $errors['password'] = 'Mot de passe non valide';
+            $passwordHelper = 'has-error';
+        }
+        if (count($errors) == 0) {
+            $userExist = $user->checkUser();
+            if ($userExist == 3) {
+                $message = 'Le compte existe déjà';
+            } elseif ($userExist == 2) {
+                $message = 'L\'email existe déjà';
+            } elseif ($userExist == 1) {
+                $message = 'Le login existe déjà';
+            } else {
+                if ($user->addUser()) {
+                    $_SESSION["isConnected"] = $user->login;
+                    $_SESSION['idUser'] = $user->id;
+                    header("Location: http://projetTP/espaceMembre.html");
+                    exit;
+                }
             }
         }
     } else {
-        //Si $_POST est vide, on passe $userError à true (nous permet d'afficher notre message d'erreur dans la vue)
-        $userError = true;
-    }
-
-    //On vérifie si les $_POST password et confirmPassword sont bien rempli et qu'ils sont bien identiques
-    if (!empty($_POST['password']) && !empty($_POST['confirmPassword']) && $_POST['password'] == $_POST['confirmPassword']) {
-        //Si tout va bien, on stocke dans l'attribut password de l'objet user, la version chiffrée du mot de passe
-        //On chiffre le mot de passe avec la fonction password_hash qui prend en paramètre le mot de passe envoyée et la méthode de chiffrement (cf PHP.net)
-        $user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    } else {
-        //Si un des $_POST est vide ou que les mots de passes ne sont pas identiques, on passe $userError à true 
-        //(nous permet d'afficher notre message d'erreur dans la vue)
-        $userError = true;
-    }
-    //S'il n'y a pas d'erreur, on ajoute l'utilisateur
-    if (!$userError) {
-        if ($user->addUser()) {
-            $_SESSION["isConnected"] = $user->login;
-            $_SESSION['idUser'] = $user->id;
-            header("Location: http://projetTP/espaceMembre.html");
-            exit;
-        }
+        $groupName->id_groupType = 1;
+        $groupList = $groupName->getGroupList();
     }
 }
-?>

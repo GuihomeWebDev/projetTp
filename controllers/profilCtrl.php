@@ -5,7 +5,6 @@ $user = new users();
 //recuperation de id user 
 $user->id = $_SESSION['idUser'];
 
-
 //si le boutton suppression et cliqué par l'utilisateur
 if (isset($_POST['deleteMember'])) {//on verifi que le champ mail n'est pas vide
     if (!empty($_POST['mail'])) {//on vérifie que le format mail est valide 
@@ -22,6 +21,7 @@ if (isset($_POST['deleteMember'])) {//on verifi que le champ mail n'est pas vide
     }
 }
 $user->getUserById();
+$member = $user->memberNumber();
 
 if (isset($_POST['modifyProfil'])) {
     $errorList = array();
