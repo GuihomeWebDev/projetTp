@@ -14,7 +14,10 @@ class group extends database {
         parent::__construct();
         $this->connectDB();
     }
-
+    /**
+     * Ajoute le nom d'un group dans la table et le lie avec l'id group pour qu'il corresponde à une catégorie de group
+     * dans la table group_type
+     */
     public function addGroup() {
         //requete SQL qui permet d'ajouter une ligne dans la table nommé avec un préfix  JLpeLJpmTp_group 
         $insert = 'INSERT INTO `JLpeLJpmTp_group` (`name`, `id_groupType`) VALUES (UPPER(:name),:id_groupType)';
@@ -26,20 +29,29 @@ class group extends database {
         //la methode retourne un boolean qui verifie si la requete a été executé ou pas.
         return $queryPrepare->execute();
     }
-
+    /**
+     * Permet de récupérer l' id utilisateur
+     * 
+     */
     public function lastInsertId() {
         return $this->pdo->lastInsertId();
     }
-
+    /**
+     * Affiche la liste des groupes dans un select
+     * 
+     */
     public function getGroupList() {
-        //requete SQL qui permet d'ajouter une ligne dans la table nommé avec un préfix  JLpeLJpmTp_events 
+        
         $query = 'SELECT `name`, `id` FROM `JLpeLJpmTp_group` WHERE `id_groupType`=:id_groupType';
         $queryPrepare = $this->pdo->prepare($query);
         $queryPrepare->bindValue(':id_groupType', $this->id_groupType, PDO::PARAM_INT);
         $queryPrepare->execute();
         return $queryPrepare != FALSE ? $queryPrepare->fetchALL(PDO::FETCH_OBJ) : FALSE;
     }
-
+    /**
+     * Vérifi si un group crée existe deja 
+     * 
+     */
     public function checkifexist() {
         $idExist = 0;
         $check = 'SELECT `id` FROM `JLpeLJpmTp_group` WHERE `name`= UPPER(:name) AND `id_groupType`=:id_groupType';

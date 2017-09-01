@@ -51,10 +51,9 @@ $(function () {
                     });
                 },
                 'JSON');
-
-//script ajax pour le remplissage de mon formulaire modification évènement 
         $('#myModal').modal('show');
     });
+    //script ajax pour le remplissage de mon formulaire modification évènement 
     // declenchement à la selection dans le 'select'
     $('#events').change(function (event) {
         event.preventDefault();

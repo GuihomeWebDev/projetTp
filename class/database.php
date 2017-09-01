@@ -37,10 +37,11 @@ class database {
     public function connectDB() {
         try {
             $this->pdo = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db . ';charset=utf8', $this->login, $this->pwd);
+            
         }
 // Si il y a une erreur on "attrape" l'exception dans $e et on affiche un message d'erreur
         catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
+            echo 'Base de données inaccessible';
         }
     }
 

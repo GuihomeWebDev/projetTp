@@ -1,5 +1,5 @@
 <?php
-
+//utilisation d'ajax
 if (isset($_POST['selectedGroup'])) {
     include_once '../configuration.php';
     include_once '../class/database.php';
@@ -24,12 +24,13 @@ if (isset($_POST['selectedGroup'])) {
      * Pour enregistrer un nouvel utilisateur, on nettoie les champs puis
      * on les stocks dans l'objet user.
      * Si tout est correcte, on vérifie que le pseudonyme ainsi que l'email
-     * n'existent pas. Si c'est bien le cas, alors on ajoute l'utilisateur 
+     * n'existent pas. Si c'est ok ce cas, alors on ajoute l'utilisateur 
      */
     if (isset($_POST['save'])) {
         if (!empty($_POST['groupType'])) {
             $groupName->id_groupType = strip_tags($_POST['groupType']);
             if (isset($_POST['groupName'])) {
+                //le 0 ici correspond au champ nouveau dans le select
                 if ($_POST['groupName'] != 0) {
                     $user->id_group = strip_tags($_POST['groupName']);
                 } else {
@@ -53,7 +54,7 @@ if (isset($_POST['selectedGroup'])) {
             $user->login = strip_tags($_POST['login']);
             $loginHelper = 'has-success';
         } else {
-            $errors['login'] = 'Ce nom  existe déjà ';
+            $errors['login'] = 'Ce speudo existe déjà ';
             $loginHelper = 'has-error';
         }
         if (!empty($_POST['mail'])) {

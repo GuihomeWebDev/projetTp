@@ -10,6 +10,13 @@ include_once 'models/events.php';
             <h1>Bienvenue <?= $_SESSION["isConnected"] ?></h1>
         </div>
     </div>
+    <?php if(!empty($message)){?>
+    <div class="row">
+        
+        <p><?= $message ?></p>
+        
+    </div>
+    <?php }?>
 </div>
 <div class="container tabEvent">
     <div class="row">
@@ -74,7 +81,7 @@ include_once 'models/events.php';
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
-                                <label class="label" for="contribution" >coût de l'entrée :</label>
+                                <label class="label" for="contribution" >coût de l'entrée en Euro :</label>
                             </div>
                             <div class="col-md-5">
                                 <input class="form-control" type="text" name="contribution" id="contribution" placeholder="coût de l'entrée" value="<?= $event->contribution ?>" required>

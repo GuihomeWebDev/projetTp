@@ -10,6 +10,10 @@ class groupType extends database {
         parent::__construct();
         $this->connectDB();
         }
+        /**
+         * Affiche les différents types de groupes dans un select
+         * 
+         */
         public function getGroupType(){
         $add = 'SELECT `id`,`name` FROM  `JLpeLJpmTp_groupType`';
         $query = $this->pdo->query($add);

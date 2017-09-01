@@ -1,4 +1,5 @@
 <?php
+
 //utilisation de ajax dans le if
 if (isset($_POST['eventUpdate'])) {
     include_once '../configuration.php';
@@ -9,6 +10,7 @@ if (isset($_POST['eventUpdate'])) {
     echo json_encode(array('events' => $event->getEventsById()));
     //utilisation sans ajax dans le else
 } else {
+
     /**
      * fonction qui formate la date au format jours/mois/année et qui la restitue au format année-mois-jours et qui verifie que c'est bien une date
      * en cas d'erreur elle revoie false
@@ -24,7 +26,7 @@ if (isset($_POST['eventUpdate'])) {
     $event = new events();
     $event->idUsers = $_SESSION['idUser'];
 //verifis que l utilisateur à appuyé sur le bouton supprimer et que les données attendues soient bien numérique
-    if (isset($_GET['event'])&& is_numeric($_GET['event'])) {
+    if (isset($_GET['event']) && is_numeric($_GET['event'])) {
         //recupere dans les proprietés id et idUser les informations passées en GET       
         $event->id = $_GET['event'];
         if (!$event->removeEvents()) {
@@ -62,32 +64,30 @@ if (isset($_POST['eventUpdate'])) {
             $event->endDate = $endDate;
         }
     }
-    
+
 //ajouts d'évènements dans la BDD
+    $message ='';
     if (isset($_POST['create'])) {
-        if (!empty($_POST['name'])) {
+
+        if (!empty($_POST['name']) && !empty($_POST['startDate']) && !empty($_POST['startTime']) && !empty($_POST['endDate']) && !empty($_POST['description']) && !empty($_POST['location']) && !empty($_POST['contribution'])) {
             $event->name = strip_tags($_POST['name']);
-        }
-        if (!empty($_POST['startDate'])) {
             $event->startDate = strip_tags($_POST['startDate']);
-        }
-        if (!empty($_POST['startTime'])) {
             $event->startTime = strip_tags($_POST['startTime']);
-        }
-        if (!empty($_POST['endDate'])) {
             $event->endDate = strip_tags($_POST['endDate']);
-        }
-        if (!empty($_POST['description'])) {
             $event->description = strip_tags($_POST['description']);
-        }
-        if (!empty($_POST['location'])) {
             $event->location = strip_tags($_POST['location']);
-        }
-        if (!empty($_POST['contribution'])) {
             $event->contribution = strip_tags($_POST['contribution']);
+            if($event->addEvents()){
+                $message='Un évènement à été ajouté';
+            }else{
+                $message ='Echec d\'ajout de l\'évènement';
+            }
+                
+        } else {
+            $message='Veuillez remplir tous les champs';
         }
-        $event->addEvents();
     }
+
 //modification d'évènements dans la table
     if (isset($_POST['update'])) {
         if (!empty($_POST['name'])) {
@@ -114,7 +114,6 @@ if (isset($_POST['eventUpdate'])) {
         if (!empty($_POST['events'])) {
             $event->id = strip_tags($_POST['events']);
         }
-        $event->editEvents();        
+        $event->editEvents();
     }
-    
 }

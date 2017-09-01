@@ -12,9 +12,9 @@ if(isset($_POST['timestamp'])){
     //on stock dans events l'execution de la methode getEventsByDate();
     $events = $date->getEventsByDate();
     //on affiche le json plcé dans un tableau
-    echo json_encode(array('events'=>$events,'groupName' => 'name'));
-    //execution sans ajax...
+    echo json_encode(array('events'=>$events,'groupName' => 'name'));    
 } else {   
+    //execution sans ajax...
 function getAll($year) {
     $r = array();
     $date = new DateTime($year . '-01-01');

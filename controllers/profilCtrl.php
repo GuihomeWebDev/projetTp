@@ -6,8 +6,10 @@ $user = new users();
 $user->id = $_SESSION['idUser'];
 
 //si le boutton suppression et cliqué par l'utilisateur
-if (isset($_POST['deleteMember'])) {//on verifi que le champ mail n'est pas vide
-    if (!empty($_POST['mail'])) {//on vérifie que le format mail est valide 
+if (isset($_POST['deleteMember'])) {
+//on verifi que le champ mail n'est pas vide
+    if (!empty($_POST['mail'])) {
+//on vérifie que le format mail est valide 
         if (filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL)) {
             $user->mail = $_POST['mail'];
             //on execute la fonction deleteMember

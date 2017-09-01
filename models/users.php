@@ -80,7 +80,10 @@ class users extends database {
         $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
         return $result->exist;
     }
-
+    /**
+     * Permet de suppimer un utilisateur
+     * 
+     */
     public function deleteMember() {
         $delete = 'DELETE FROM `JLpeLJpmTp_users` WHERE `mail` = :mail AND `id` = :id';
         $queryPrepare = $this->pdo->prepare($delete);
@@ -88,7 +91,10 @@ class users extends database {
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryPrepare->execute();
     }
-
+    /**
+     * Permet d'afficher les données de l'utilisateur (mail, login, password) dans son espace personnel
+     * 
+     */
     public function getUserById() {
         $isOk = false;
         $display = 'SELECT `password`,`id`,`mail`,`login`, `id_group` FROM `JLpeLJpmTp_users` WHERE `id` = :id';
@@ -106,7 +112,10 @@ class users extends database {
         }
         return $isOk;
     }
-
+    /**
+     * Permet de modifier les données personnel de l'utilisateur (mail, login, mot de passe)
+     * 
+     */
     public function editProfil() {
         $update = 'UPDATE `JLpeLJpmTp_users` SET `login`= :login,`mail`= :mail,`password`= :password WHERE `id`= :id';
         $queryPrepare = $this->pdo->prepare($update);
@@ -116,7 +125,10 @@ class users extends database {
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryPrepare->execute();
     }
-
+    /**
+     * Permet d'afficher le nombre d'utilisateur partageant le meme group
+     * 
+     */
     public function memberNumber() {
         $query = 'SELECT COUNT(`usr`.`id_group`) AS `number`, `group`.`name` FROM `JLpeLJpmTp_users` AS `usr` INNER JOIN `JLpeLJpmTp_group` AS `group` ON `usr`.`id_group` = `group`.`id` WHERE `usr`.`id_group`= :id_group';
         $queryPrepare = $this->pdo->prepare($query);
