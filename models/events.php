@@ -28,15 +28,12 @@ class events extends database {
      * 
      */
     public function removeEvents() {
-        $delete = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUsers` = :idUsers';
-        try {          
+        $delete = 'DELETE FROM `JLpeLJpmTp_events` WHERE `id` = :id AND `idUsers` = :idUsers';                 
         $queryPrepare = $this->pdo->prepare($delete);
         $queryPrepare->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryPrepare->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         return $queryPrepare->execute();
-         } catch (Exception $ex) {
-             echo 'Vérifier la requête SQL removeEvents';
-        }
+         
     }
 
     /**
@@ -83,7 +80,7 @@ class events extends database {
     }
 
     /**
-     * déclaration de la méthode getEvents qui permet d'afficher les lignes de la table
+     * déclaration de la méthode getEvents qui permet d'afficher les évènements
      * 
      */
     public function getEvents() {

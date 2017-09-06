@@ -11,15 +11,20 @@ if(isset($_POST['timestamp'])){
     $date->startDate = date('Y-m-d', $_POST['timestamp']);
     //on stock dans events l'execution de la methode getEventsByDate();
     $events = $date->getEventsByDate();
-    //on affiche le json plcé dans un tableau
+    //on affiche le json placé dans un tableau
     echo json_encode(array('events'=>$events,'groupName' => 'name'));    
 } else {   
     //execution sans ajax...
+    /**
+     * 
+     * création du calendrier avec recupération des mois jours et année.
+     * 
+     */
 function getAll($year) {
     $r = array();
     $date = new DateTime($year . '-01-01');
     while ($date->format('Y') <= $year) {
-        // Ce que je veux => $r[ANEEE][MOIS][JOUR] = JOUR DE LA SEMAINE
+        // Récupération => $r[ANEEE][MOIS][JOUR] = JOUR DE LA SEMAINE
         $y = $date->format('Y');
         $m = $date->format('n');
         $d = $date->format('j');

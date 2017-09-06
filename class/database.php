@@ -40,8 +40,8 @@ class database {
             
         }
 // Si il y a une erreur on "attrape" l'exception dans $e et on affiche un message d'erreur
-        catch (Exception $e) {
-            echo 'Base de données inaccessible';
+       catch (Exception $e) {
+            die('Pas de connection à la base de données : ' . $e->getMessage());
         }
     }
 
